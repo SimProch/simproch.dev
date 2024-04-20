@@ -1,0 +1,235 @@
+<script>
+    import Contents from './02-array-based-data-structures.json';
+    export const contents = Contents
+</script>
+
+# {Contents.title}
+
+{contents.subtitle}
+
+## [Introduction](#intro)<span id="intro" />
+
+Hello again! This is another Data Structure topic. In [Big Oh](/posts/01-big-oh), I've worked with 
+arrays for sorting, but I've also mentioned sets in the beginning.
+
+In this part, I'd like to take a deeper look at array based data structures. Under the hood, they are 
+basically arrays, but we add some logic to it.
+
+Let me quickly just add some quick numbers:
+- Adding element to end array -> `array.push` -> O(1) - Add to end, no moves needed
+- Adding element to start of array -> `array.unshift` -> O(n) - Add to start and shift all others to the end
+- Removing element from array -> `array.splice` -> O(n) - Remove on position, shift all next ones to the start
+- Adding element to a specific position -> Same as above, just addition and shift to end
+
+Now, this part is not about deep dive into array and writing our own splice or push. However, it's 
+something to keep in mind when we talk about speeds.
+
+## [Stack](#stack)<span id="stack" />
+
+[Stack](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)) is exactly what it says it is. 
+Sometimes, it can also be called Last In, First Out, or LIFO for short.
+
+Consider that you have had visitors at your house. All of them have eaten something and you're about to 
+do the dishes. Chances are, you start collecting plate:
+- Then you add another one on top
+- Then another...
+- Then another...
+
+Now, you've got a __stack__ of plates. When you start doing the dishes, you're probably:
+- Taking the top one off
+- Then another...
+- Then another...
+
+Because with dishes, it wouldn't make much sense otherwise.
+
+Now, in data structures, it's exactly that. So, let us quickly write one!
+
+```js
+class Stack {
+  state = [];
+  push(val) {
+    return this.state.push(val);
+  }
+  pop() {
+    return this.state.pop();
+  }
+  read() {
+    return this.state.at(-1);
+  }
+}
+```
+
+Now, we've created a stack. But why? 
+- We'll learn about it later with trees, with stack is needed in depth-first search
+- JavaScript (and other programming languages) implement [Call Stack](https://en.wikipedia.org/wiki/Call_stack)
+  - If you called a function from somewhere, the computer needs to know where to return
+- And many other reasons
+
+To be completely honest here, I've seen stacks so many times that I don't consider them special, and I'm having a 
+hard time coming up with good general examples.
+
+So, let's define a problem for it! Consider you're using JavaScript and you want your code to be safe. 
+Perhaps you are using a [Linter](https://en.wikipedia.org/wiki/Lint_(software)) to analyse your code?
+
+Well, consider that you wrote this piece of code:
+```js
+const fn = ({) => {}
+```
+
+Now, that's invalid JavaScript because of the brackets! There's one that's not closed! How can we leverage stack?
+
+Well, basically, we'd go through the text and retrieve the brackets from it first! After doing so, we'd be left with:
+```js
+// invalid
+"({){}"
+"({])"
+"[{(()()()()))}]"
+
+// valid
+"{[({({}{}{}){}})]}"
+```
+
+Now, I've added more examples. You have multiple options here:
+- You can try to do some complex logic like iterating through it until you get to empty string or odd-numbered brackets
+- (probably more options)
+- You can use a stack
+
+In this case, stack would indeed be the easiest!
+- You iterate over the string
+- Whenever you add an item, you first check if the next bracket closes the previous one
+- If yes, remove them both
+- If not, add them
+- When you reach the end, if it's a valid sequence, the text is empty
+
+This code might look something like this:
+```js
+const lint = (str) => {
+  const stack = [];
+  for (let i = 0; i < str.length; i++) {
+    const current = str[i];
+    const isOpening = openingBraces.includes(current);
+    if (isOpening) {
+      stack.push(current);
+      continue;
+    }
+
+    const lastOnStack = stack.at(-1);
+    const closingForPrevious = openToClose[lastOnStack];
+    if (current === closingForPrevious) {
+      stack.pop();
+    } else {
+      stack.push(current);
+    }
+  }
+  return stack.length === 0;
+};
+```
+
+Now, admittedly, this doesn't lint - specifically, it doesn't say what's missing. But we now know whether it's valid or not. We could add the rules in there later.
+
+## [Queue](#queue)<span id="queue" />
+
+Another array-based abstract data type is [Queue](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)). With 
+queues, we basically flip around stacks. While before, we were working with LIFO, here, it's often called FIFO.
+
+Now, queues are easy to understand, especially because it's so common.
+- When you're in school and you wait for lunch, you are waiting for your turn. The first person in line 
+is the first to be served
+- When you start printing something, the first document you scheduled is the first to be served
+  - Funnily enough, a printer has both queue and stack
+  - A queue when you are printing the documents
+  - The paper that's processed is taken from a stack of papers!
+
+So, let's make a quick code of queue!
+
+```js
+function Queue() {
+    this.state = [];
+    this.enqueue = (val) => this.state.push(val);
+    this.dequeue = () => this.state.shift();
+    this.read = () => this.state[0];
+}
+```
+
+Now, in stacks, we had push, pop and read. We have the same in queues, except:
+- Enqueuing means adding to the end of stack (push)
+- Dequeuing means removing from the start of stack (unshift)
+
+Now, one thing to note here is that it may sound like we have 4 different options, not just stack and queue! But we don't!
+- If we were to add and remove from the start of array, it'd be essentially slower stack (FIFO)
+- If we were to add to start and remove from end, it'd essentially be queue (LIFO)
+
+So, those are actually the only 2 data structures that make sense!
+
+Now, I've mentioned printer. It's a really good programmatic usecase. So, let's write that one!
+
+```js
+function Printer() {
+    this.queue = new Queue();
+    this.add_print_job = (job) => this.queue.enqueue(job);
+    this.run = () => {
+        while (this.queue.read()) {
+            const toPrint = this.queue.dequeue();
+            this.print(toPrint);
+        }
+    }
+    this.print = (job) => console.log(job);
+}
+
+const printer = new Printer();
+printer.add_print_job("First document");
+printer.add_print_job("Second document");
+printer.add_print_job("Third document");
+printer.run();
+```
+
+And that's it! Queues are quite simple to understand. That is the case with stacks as well!
+
+The real magic comes when we find out later that these two structures are necessary for other algorithms. 
+So, keep them in mind until graphs and trees where we'll deal with breadth-first search and depth-first search, 
+and we will use both data structures to implement those.
+
+## [Set](#set)<span id="set" />
+
+The last thing to cover in this part is a [Set](https://en.wikipedia.org/wiki/Set_(abstract_data_type)).
+
+Now, Set is basically an array with one rule - it doesn't allow duplicates. In JS, there's already an implementation through 
+the [Set Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set).
+
+Because of that, I'm not gonna write set from scratch. Rather, I'm gonna focus only on the addition part:
+```js
+class Set2 {
+    set = [];
+    push(what) {
+        for (let i = 0; i < this.set.length; i++) {
+            if (this.set[i] === what) {
+                return;
+            }
+        }
+        this.set.push(what)
+    }
+}
+```
+
+Now, if you'd add the number `1` and `2`, it'd pass properly. However, if you'd then try to add 
+`1` again, it would never be added.
+
+Again, it depends on what you need. Sometimes, you need the data source not to contain duplicates. Set would be the way to go.
+
+## [Summary](#summary)<span id="summary" />
+
+So, in this part, we've explored 3 different abstract data types:
+- Stack (last in first out array)
+- Queue (first in first out array)
+- Set (no duplicates array)
+
+Now, there are other ways of doing this. Sometimes, [Linked list](https://en.wikipedia.org/wiki/Linked_list) is used 
+to create these. But we'll get there later.
+
+## [References](#references)<span id="references" />
+- [A Common-Sense Guide to Data Structures and Algorithms](https://www.amazon.com/Common-Sense-Guide-Data-Structures-Algorithms/dp/1680502441)
+- [Stack](https://en.wikipedia.org/wiki/Stack_(abstract_data_type))
+- [Queue](https://en.wikipedia.org/wiki/Queue_(abstract_data_type))
+- [Set](https://en.wikipedia.org/wiki/Set_(abstract_data_type))
+- [Set Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
+- [Linked list](https://en.wikipedia.org/wiki/Linked_list)

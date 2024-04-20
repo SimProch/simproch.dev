@@ -1,0 +1,9 @@
+{
+	"id": "10-system-design-chat-service",
+	"date": "20. 11. 2023",
+	"title": "System Design 10 - Chat Service",
+	"subtitle": "Build our own discord",
+	"tags": ["system-design", "system", "design"],
+	"description": "Tenth part describes how to build a chat service, such as discord, whatsapp, facebook messenger and more.",
+	"breadcrumbs": "System Design"
+}

@@ -1,0 +1,9 @@
+{
+	"id": "git-cli-basic-commands",
+	"date": "20. 10. 2023",
+	"title": "Git CLI basic commands",
+	"subtitle": "A cheat-sheet curated by yours truly",
+	"tags": ["git", "scm", "development"],
+	"description": "Blog posts that I wrote down for myself to better remember GIT commands I often use.",
+	"breadcrumbs": "Development"
+}

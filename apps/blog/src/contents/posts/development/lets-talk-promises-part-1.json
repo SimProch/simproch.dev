@@ -1,0 +1,9 @@
+{
+	"id": "lets-talk-promises-part-1",
+	"date": "23. 10. 2023",
+	"title": "Let's talk promises - Part 1",
+	"subtitle": "An asynchronous journey",
+	"tags": ["development", "javascript", "promises", "asynchronous"],
+	"description": "First part of JavaScript promises deepdive and how they behave",
+	"breadcrumbs": "Development"
+}

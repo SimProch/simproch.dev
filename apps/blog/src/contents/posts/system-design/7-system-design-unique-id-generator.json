@@ -1,0 +1,9 @@
+{
+	"id": "7-system-design-unique-id-generator",
+	"date": "14. 11. 2023",
+	"title": "System Design 7 - Unique ID generator",
+	"subtitle": "To build my own UUID",
+	"tags": ["system-design", "system", "design"],
+	"description": "Seventh part deals with ID generator in distributed environment.",
+	"breadcrumbs": "System Design"
+}

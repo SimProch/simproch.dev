@@ -1,0 +1,246 @@
+<script>
+    import Contents from './lets-talk-promises-part-1';
+    export const contents = Contents
+</script>
+
+# Let's talk promises - Part 1
+
+An asynchronous journey
+
+## [Introduction](#intro)<span id="intro" />
+
+Promises are a core feature in JavaScript. They've been around all the way back in 2015 when [ES6](http://es6-features.org/#PromiseUsage) became a standard. 
+Prior to that, libraries had their own implementations of asynchronous code. All code used in this post is available at [my GitHub](https://github.com/SimProch/lets-talk-promises).
+
+## [What is asynchronous?](#what-is-async)<span id="what-is-async" />
+
+So asynchronous is a term that's been around for quite some time. There are other people that are better at explaining 
+how it works and I'd just be repeating that. However, I'd suggest the following resources:
+- [What the heck is the event loop anyway by Philip Roberts](https://www.youtube.com/watch?v=8aGhZQkoFbQ)
+- [Asynchronous Programming by Microsoft](https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/)
+- [JSConf In The Loop by Jake Archibald](https://www.youtube.com/watch?v=cCOL7MC4Pl0)
+
+How I like to view it in short is:
+- __Synchronous__ code is where 2 lines in succession are always executed in the same order
+- __Asynchronous__ code is where 2 lines in succession may or may not be executed in the same order
+
+The example of such code can be:
+```js
+// synchronous
+function getMyValueSync() {
+    return 20;
+}
+
+function myFunction() {
+    const a = getMyValueSync();
+    console.log(a);
+}
+
+console.log('First log');
+myFunction(); // Second log - 20
+console.log('Third log')
+```
+
+Now, to make this simple __synchronous__ code async, let's use `Promises`:
+
+```js
+// asynchronous
+async function getMyValueAsync() {
+  return 20;
+}
+
+async function myFunction() {
+  const a = await getMyValueAsync();
+  console.log(a);
+}
+
+(async () => {
+  console.log("First log");
+  myFunction(); // Actually third log - 20
+  console.log("Second log");
+})();
+```
+
+> In the previous example, I've used Immediately Invoked Function Expression, or IIFE for short. 
+> This allows me to do the example in Node.JS directly. [You can read about them here](https://developer.mozilla.org/en-US/docs/Glossary/IIFE).
+
+Just like that, using the exact same code, yet putting there a bunch of `async` and `await` keywords, we've 
+made the code __asynchronous__. With __synchronous__ code, we've logged:
+- First log
+- 20
+- Third log
+
+With __asynchronous__ code, we've logged:
+- First log
+- Third log
+- 20
+
+> Note: You can (and, in fact, should) await the `myFunction` call in the last code block.  
+> I've purposely omitted it to show the dangers of async code - that 2 lines in succession might not be executed as expected
+
+
+## [Basic Promise](#basic-promise)<span id="basic-promise" />
+A promise has 3 states:
+- `pending` - The `Promise` has not been neither `resolved` not `rejected`
+- `fulfilled` - The `Promise` has reached a final state through `resolve`
+- `rejected` - The `Promise` has reached a final state through `reject`
+
+
+There are 2 ways to created a `Promise`
+- [ES6 Promise](http://es6-features.org/#PromiseUsage)
+- [ES8 Async/Await](https://gist.github.com/rajaramtt/7df3702a04c644b0b62c9a64f48f3dbf#3-ecmascript-2017---es2017---es8)
+
+
+While I prefer the latter, it is beneficial to understand the first one to see what exactly is happening inside and why we need multiple ways of creating them. 
+Let's create a couple `Promises` and look at the states defined above:
+
+```js
+(() => {
+    const myPendingPromise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve()
+        }, 500);
+    });
+    console.log(myPendingPromise)
+})
+```
+
+When creating a `Promise` and don't wait for it to finish, when we log it immediately, we can see in console `Promise { <pending> }`.
+Now, let's extend the code and see the state it is in after awaiting it:
+
+```js
+(async () => {
+  const myPendingPromise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, 500);
+  });
+  const myFulfilledPromise = new Promise((resolve, reject) => resolve());
+  await myFulfilledPromise;
+  console.log(myPendingPromise);
+  console.log(myFulfilledPromise);
+})();
+```
+
+In the console, now we'll see:
+- `Promise { <pending> }` - The `Promise` has been defined, but the `resolve` is yet to be called because of timeout.
+- `Promise { undefined }` - The `Promise` has been defined and resolved immediately. This `Promise` is `fulfilled` and holds a value.
+
+Note the `await myFulfilledPromise`. If I were to `await` on previous line, I'd have gotten the value `undefined` and could no longer log the state of the `Promise`.
+
+Finally, let's explore the `rejected` state. For the fulfilled, we've used the `resolve` callback. 
+For the `rejected`, we'll need to use the `reject` function. Consider the following code
+
+```js
+(async () => {
+    const myRejectedPromise = new Promise((resolve, reject) => reject());
+})()
+```
+
+Now, unfortunately, this part is not going to work. That is because __rejecting a promise throws an error__. So, let's wrap it in a `try/catch` block:
+
+```js
+(async () => {
+    try {
+        const myRejectedPromise = new Promise((resolve, reject) => reject());
+    } catch (e) {
+        console.log(e);
+    }
+})()
+```
+
+If we try to run this code, we'll again reach the same error - `UnhandledPromiseRejection`. But that is because `Promises` are __asynchronous__! Let's `await` it then:
+
+```js
+(async () => {
+    try {
+        const myRejectedPromise = new Promise((resolve, reject) => reject());
+        await myRejectedPromise;
+    } catch (e) {
+        console.log(e);
+    }
+})()
+```
+
+In this case, the `Promise` was `rejected`. After exploring all these states, let's put the code all together:
+
+```js
+(async () => {
+  const myPendingPromise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, 500);
+  });
+  const myFulfilledPromise = new Promise((resolve, reject) => resolve());
+  await myFulfilledPromise;
+  console.log(myFulfilledPromise)
+  try {
+    const myRejectedPromise = new Promise((resolve, reject) => reject());
+    await myRejectedPromise;
+  } catch (e) {
+    console.log(e);
+  }
+})();
+```
+
+## [Why do you combine Promise and async/await?](#combine-promise-async-await)<span id="combine-promise-async-await" />
+
+So, in the examples before, I've used the `Promise` constructor rather than `async await` to create a `Promise`. 
+I've also said that you can create a `Promise` through those.
+
+So, the important thing about `async/await` is that it applies to functions. Consider the following example:
+
+```js
+const promise = new Promise((resolve, reject) => resolve(20));
+console.log(promise) // Promise { 20 }
+```
+
+In the example above, I've created a `Promise` that holds a value 20 using `Promise constructor`. 
+To create a `Promise` that holds a value 20 with `async/await`, I can simply do this:
+
+```js
+async function createPromise(val) {
+    return val;
+}
+
+const promise = createPromise(20);
+console.log(promise); // Promise { 20 }
+```
+
+To reject a promise, I'd do:
+```js
+const promise = new Promise((resolve, reject) => reject());
+try {
+  await promise;
+} catch (e) {
+  console.log(e); // undefined
+}
+```
+
+However, with `async/await`, I'm going to `throw`:
+
+```js
+async function createPromise() {
+  throw undefined;
+}
+
+try {
+  const promise = await createPromise();
+} catch (e) {
+  console.log(e); // undefined
+}
+```
+
+I believe that is enough for now. If you'd like to know how the world looked without `async/await` and it can kill your application, 
+read more in the [part 2 of Let's talk promises](/posts/lets-talk-promises-part-2)
+
+
+## [References](#references)<span id="references" />
+- [ES6 Features Promise](http://es6-features.org/#PromiseUsage)
+- [What the heck is the event loop anyway by Philip Roberts](https://www.youtube.com/watch?v=8aGhZQkoFbQ)
+- [Asynchronous Programming by Microsoft](https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/)
+- [JSConf In The Loop by Jake Archibald](https://www.youtube.com/watch?v=cCOL7MC4Pl0)
+- [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE)
+- [ES8 Features Async/Await](https://gist.github.com/rajaramtt/7df3702a04c644b0b62c9a64f48f3dbf#3-ecmascript-2017---es2017---es8)
+- [Thenables in JavaScript](https://masteringjs.io/tutorials/fundamentals/thenable)
+- [Code examples](https://github.com/SimProch/lets-talk-promises)

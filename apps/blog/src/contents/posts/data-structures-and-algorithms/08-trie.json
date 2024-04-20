@@ -1,0 +1,9 @@
+{
+	"id": "08-trie",
+	"date": "2. 12. 2023",
+	"title": "Trie",
+	"subtitle": "Please trie hard",
+	"tags": ["data", "structures", "node", "trie", "tree"],
+	"description": "Let's build autocomplete!",
+	"breadcrumbs": "Data Structures & Algorithms"
+}

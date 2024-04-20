@@ -1,0 +1,92 @@
+<script>
+    import Contents from './09-graphs.json';
+    export const contents = Contents
+</script>
+
+# {Contents.title}
+
+{contents.subtitle}
+
+## [Introduction](#intro)<span id="intro" />
+
+So, we've made it through quite a bunch of chapters. In this part, I'd like to perform a sort of wrap up.
+- We've investigated arrays and their structures related to it - Queues, Stacks, sets
+- We've gone through hash maps and saw why they are fast
+- We've gone through recursion and implemented quicksort & quicksearch
+- We've gone through node-based data structures
+  - Linked lists for more effective queues
+  - Binary search trees for fast searching
+  - Heaps for priority quueues
+  - Tries for text-based features
+  - Graphs for... everything
+
+In this part, I'd like to revisit two of them.
+- Graphs
+- Quicksort & QuickSelect
+
+The first one to kinda open some eyes when working with them, because graphs don't always need to be nodes. So, let's take a look at a couple tasks:
+
+## [Traverse array elements diagonally](#diagonal-array-elements)<span id="diagonal-array-elements" />
+
+Let's take a look at [this CodeWars task](https://www.codewars.com/kata/5968fb556875980bd900000f). The task is fairly simple:
+
+```js
+const arr = [
+ [4, 5, 7],
+ [7, 6, 2]
+ [3, 9, 1],
+]
+
+diagonal(arr) // => [2,1,9.7,6,3,5,7,4]
+```
+
+Now, you could do this with different ways. But you can actually view it as a graph!
+- we want to log bottom left first
+- then we want to log adjacent cells (with top one being first)
+- we perform until we're done
+
+And that looks oddly like BFS! So the result could look like this:
+```js
+const diagonal = (arr) => {
+  const start = {
+    col: arr.length - 1,
+    row: arr.length - 1,
+  };
+  const queue = [start];
+  const result = [];
+
+  while (queue.length > 0) {
+    const { col, row } = queue.shift();
+
+    const adjacent = [
+      {
+        col: col - 1,
+        row,
+      },
+      {
+        col,
+        row: row - 1,
+      },
+    ];
+
+    adjacent.forEach(({ col, row }) => {
+      const exists = queue.find((i) => i.col === col && i.row === row);
+      const valid = col > -1 && row > -1;
+      if (!exists && valid) queue.push({ col, row });
+    });
+    result.push(arr[col][row]);
+  }
+  return result;
+};
+```
+
+It's a basic BFS:
+- enqueue not visited nodes
+- push each to an array
+- return the array
+
+And that's it! Thanks to knowing graphs, I could very easily solve this potentially cumbersome!
+
+
+## [References](#references)<span id="references" />
+- [Traverse array elements diagonally]((https://www.codewars.com/kata/5968fb556875980bd900000f))

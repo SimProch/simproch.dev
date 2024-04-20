@@ -1,0 +1,132 @@
+{
+  "../../node_modules/@sveltejs/kit/src/runtime/server/index.js": {
+    "file": "index.js",
+    "name": "index",
+    "src": "../../node_modules/@sveltejs/kit/src/runtime/server/index.js",
+    "isEntry": true,
+    "imports": [
+      "_internal.js",
+      "_exports.js",
+      "_ssr.js"
+    ]
+  },
+  ".svelte-kit/generated/server/internal.js": {
+    "file": "internal.js",
+    "name": "internal",
+    "src": ".svelte-kit/generated/server/internal.js",
+    "isEntry": true,
+    "imports": [
+      "_internal.js"
+    ]
+  },
+  "_Company.svelte_svelte_type_style_lang.js": {
+    "file": "_app/immutable/assets/Company.B_SY1GJM.css",
+    "src": "_Company.svelte_svelte_type_style_lang.js"
+  },
+  "_Detail.js": {
+    "file": "chunks/Detail.js",
+    "name": "Detail",
+    "imports": [
+      "_ssr.js",
+      "_client.js"
+    ],
+    "css": [
+      "_app/immutable/assets/TitleBlock.Bv67cU6B.css"
+    ]
+  },
+  "_TitleBlock.svelte_svelte_type_style_lang.js": {
+    "file": "_app/immutable/assets/TitleBlock.Bv67cU6B.css",
+    "src": "_TitleBlock.svelte_svelte_type_style_lang.js"
+  },
+  "_client.js": {
+    "file": "chunks/client.js",
+    "name": "client",
+    "imports": [
+      "_exports.js"
+    ]
+  },
+  "_exports.js": {
+    "file": "chunks/exports.js",
+    "name": "exports"
+  },
+  "_internal.js": {
+    "file": "chunks/internal.js",
+    "name": "internal",
+    "imports": [
+      "_ssr.js"
+    ]
+  },
+  "_ssr.js": {
+    "file": "chunks/ssr.js",
+    "name": "ssr"
+  },
+  "src/routes/+error.svelte": {
+    "file": "entries/pages/_error.svelte.js",
+    "name": "entries/pages/_error.svelte",
+    "src": "src/routes/+error.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_client.js"
+    ]
+  },
+  "src/routes/+layout.svelte": {
+    "file": "entries/pages/_layout.svelte.js",
+    "name": "entries/pages/_layout.svelte",
+    "src": "src/routes/+layout.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_client.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_layout.nlPeQVTR.css",
+      "_app/immutable/assets/TitleBlock.Bv67cU6B.css",
+      "_app/immutable/assets/Company.B_SY1GJM.css"
+    ]
+  },
+  "src/routes/+page.svelte": {
+    "file": "entries/pages/_page.svelte.js",
+    "name": "entries/pages/_page.svelte",
+    "src": "src/routes/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_client.js"
+    ],
+    "css": [
+      "_app/immutable/assets/TitleBlock.Bv67cU6B.css",
+      "_app/immutable/assets/Company.B_SY1GJM.css"
+    ]
+  },
+  "src/routes/green-fox-academy/+page.svelte": {
+    "file": "entries/pages/green-fox-academy/_page.svelte.js",
+    "name": "entries/pages/green-fox-academy/_page.svelte",
+    "src": "src/routes/green-fox-academy/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_Detail.js"
+    ]
+  },
+  "src/routes/level-works/+page.svelte": {
+    "file": "entries/pages/level-works/_page.svelte.js",
+    "name": "entries/pages/level-works/_page.svelte",
+    "src": "src/routes/level-works/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_Detail.js"
+    ]
+  },
+  "src/routes/logex-solution-centre/+page.svelte": {
+    "file": "entries/pages/logex-solution-centre/_page.svelte.js",
+    "name": "entries/pages/logex-solution-centre/_page.svelte",
+    "src": "src/routes/logex-solution-centre/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_Detail.js"
+    ]
+  }
+}

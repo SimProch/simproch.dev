@@ -1,0 +1,59 @@
+<script>
+    import Contents from './multiple-window-scene';
+</script>
+
+
+# {Contents.title}
+
+{Contents.subtitle}
+
+## [Introduction](#intro)<span id="intro" />
+
+You may've seen on [Twitter](https://twitter.com/_nonfigurativ_/status/1727322594570027343) that a guy created an amazing thing. Specifically, 
+showing multiple things inside a browser based on how many browsers are opened. He was also so kind as to [share](https://github.com/bgstaal/multipleWindow3dScene) his 
+basic code on GitHub.
+
+Now, I'm not a designer, so doing some interesting stuff is something I'll leave to the people who are better at it. What I'm interested in is the 
+coding behind it. And that's what I'm going to break down in this part.
+
+## [The Code](#code)<span id="code" />
+
+So, if we inspect the code, we can see basically 3 things happening:
+- index.html being pretty much empty except for importing Three.JS and some scripts
+- main.js handling the creation of shapes and using Three.JS
+- WindowManager.js used for handling multiple windows
+
+So, let's break it down a bit!
+
+## [Window Manager](#window-manager)<span id="window-manager" />
+
+So, the key here is event listener. Specifically, `window.addEventListener('storage')`. 
+In hindsight, it's obvious that there's an event listener for that. But I hadn't considered that being a thing. So how exactly does it help us?
+
+Well, this is a clever play now. Basically, what we do is:
+- When user accesses the page, a script is fired saying "Hey, I'm adding something to the local storage".
+- We intercept this event by the event listener
+- We react to the event
+
+One thing to note is that this is actually something that propagates only to other browsers, not the current one! You can try it yourself:
+- Create an empty web page
+- Add a button
+- Add onclick handler with logs
+- Open it in a single browser and see that the logs are never hit
+- Open multiple browsers and see that they are always hit in the browser you're not present in
+
+You can try that with the following code:
+```js
+window.addEventListener("storage", (e) => {
+  console.log(e);
+  console.log("hit in storage");
+});
+
+const onClick = () => {
+  if (localStorage.getItem("hi")) {
+    localStorage.removeItem("hi");
+  } else {
+    localStorage.setItem("hi", "hello");
+  }
+};
+```

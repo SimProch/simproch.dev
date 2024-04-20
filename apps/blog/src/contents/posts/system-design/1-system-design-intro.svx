@@ -1,0 +1,113 @@
+<script>
+    import Contents from './1-system-design-intro.json';
+    export const contents = Contents
+</script>
+
+# {Contents.title}
+
+{contents.subtitle}
+
+## [Introduction](#intro)<span id="intro" />
+
+For the first couple years of my career, I've been a frontend developer. I've got very deep in terms of JavaScript and how browsers work. 
+However, later on, I've been more and more exposed to backend, and the thought process there is completely different. 
+The main reason for that is how servers work and the code is ran. On frontend, you can easily see how it works for the user. The data is in your computer. 
+However, with backend, it's a little more nuanced.
+
+Here, I'd like to take some time to guide myself through [System Design Interview book](https://www.amazon.com/System-Design-Interview-insiders-Second/dp/B08CMF2CQF) 
+and try to understand it a little better by explaining it to others.
+
+## [What is System Design?](#what-is-system-design)<span id="what-is-system-design" />
+
+There's a bunch of different sources on what system design is. To quote [geeksforgeeks](https://www.geeksforgeeks.org/system-design-tutorial/):
+
+> System Design is the process of designing the architecture, components, and interfaces for a system so that it meets the end-user requirements. 
+> Almost every IT giant whether it be Facebook, Amazon, Google, Apple or any other ask various questions [...]
+
+So, in short, apparently it is something very important as all successful companies have interview in this area, but it's architectural. Surely 
+we can't expect everyone to be an architect, can we?
+
+## [Brainstorming, not exam](#brainstorming-not-exam)<span id="brainstorming-not-exam" />
+
+So, we can't expect everyone to be a software architect. That's a role high in the career path. But why is it asked so often?
+
+Well, system design interview is not an exam. Let's start from the opposite side and do an algorithmic interview:
+
+> Task: Write a function that will sum all numbers from 1 to N (inclusive)
+
+The above task can be done quite simply. We can do a `for` loop and iterate over all the numbers. The complexity will be 
+O(N).
+
+```js
+const getSum = (n) => {
+    let result = 0;
+    for (let i = 1; i <= n; i++) {
+        result += i;
+    }
+    return result;
+}
+```
+
+And that's it! However, we can make improvements, and here some "math magic" comes into play. You can make this in 1 step!
+
+```js
+const getSum = (n) => n * (n / 2) + (n / 2) // or n * (n + 1) / 2
+```
+
+And so, we have the best answer. You can't get better than this. It's just a simple math operation. No matter how much you try, 
+this is as good as it gets for an algorithmic exercise. Therefore, algorithmic exercise is something you can memorize. 
+But you can't do that with system design interview.
+
+## [No catch-all](#no-catch-all)<span id="no-catch-all" />
+
+So why can't you do that with system design? Why is there no one solution that fits everything? Well, because of the nature of systems. 
+Let's google "Top system design interview questions" and pick on of them.
+
+> Task: Desing an API.
+
+Well this is an easy question! We know how to make an API. We just create an endpoint and return what we want, right?
+
+Wrong. Because anything that even comes close to the correct answer (as close as it can be) depends purely on the usage. 
+Let's try to keep "designing" it the "wrong" way without any further questions:
+- I'll write a "Hello world" endpoint (let's consider this is the only thing it does)
+- The endpoint returns text and an image of a couple megabytes in size
+- I'll then deploy this endpoint on a server in Czechia
+
+Great! We're done. BUT! After we've done all of this, we learn:
+- The users of this endpoint are in the US
+
+Oh shoot! So we've gone through quite a bit of work and bought a server in Czechia, only to learn that our users 
+are on the opposite side of the planet. Which means that the data will be transferred for way longer than it would if 
+it had been in the US the entire time.
+
+This is just an extremely basic example. We could (and will) get wilder with it. What I wanted to show here is that you 
+can do a lot of useless work if you design your system in a way that is correct for users based in Czechia, but completely off 
+for users based in the US.
+
+And that's the reason why system design interview is not an exam, but rather brainstorming. You need to throw 
+questions out that come to your mind and assess it so that you are not designing for wrong needs.
+
+# [Summary](#summary)<span id="summary" />
+
+I'd like to end this intro with a note. One thing to keep in mind is that there were thousands of developers 
+participating in designing YouTube to make it globally available. And you're supposed to build it in an hour? 
+The point isn't to ask you to design everything for them. The point is to see if you are able to partake 
+design discussions and can critically think about creating software for business use cases.
+
+I'll also add a couple of questions you should ask yourself. Keep in mind that this list is far from exhaustive, 
+but it'll give you an idea of things you should consider. Let's keep to the "Design an API" task:
+- How many users will be using this API?
+  - If you have 10 users, you may be good enough with a single server
+  - If you have 10000, you may need multiple servers
+- Where are the users located?
+  - If your users are spread around the world, you may want a CDN.
+  - If they are in a single country, you're good with server in that country.
+- What is the expected availability of the API?
+  - If you need 99 % uptime, you definitely need more than one server
+
+...and costs. I don't know exact costs of servers I can use, but I can imagine that having one server is cheaper than 2.
+
+
+# [References](#references)<span id="references" />
+- [System Design Interview book](https://www.amazon.com/System-Design-Interview-insiders-Second/dp/B08CMF2CQF)
+- [GeeksForGeeks - System Design Tutorial](https://www.geeksforgeeks.org/system-design-tutorial/)

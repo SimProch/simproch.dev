@@ -1,0 +1,109 @@
+<script>
+    import Contents from './03-hash-maps.json';
+    export const contents = Contents
+</script>
+
+# {Contents.title}
+
+{contents.subtitle}
+
+## [Introduction](#intro)<span id="intro" />
+
+So, you want to know about [Hash Maps](https://en.wikipedia.org/wiki/Hash_table), eh?
+
+Well, the first thing to say that a hash map is a word known by many names. Just to name a few:
+- Hashes
+- Maps
+- Hash maps
+- Hash tables
+- Dictionaries
+- Associative arrays
+- Key-value pairs
+
+Now, it's all basically a different name to the same issue. I've worked with JS all my life, and there 
+everything is built around them. Because JS Objects are basically hash tables, and everything in JS is an object.
+
+So, why do we care? Well, for starters, they are extremely efficient! No matter the size of the object, value retrieval is always the same - O(1)
+
+But if they are so efficient, why don't we use them everywhere? Well, for starters, we don't know where they are stored! We don't know the order!
+
+(I will say that there are some nuances to JS objects and they are sometimes sorted by name, but let's not go into JS specifics)
+
+A hash map can be as simple as:
+```js
+const hashMap = {};
+const addToHashMap = (key, value) => hashMap[key] = value;
+const readFromHashMap = (key) => hashMap[key]
+```
+
+And that's basically it! Now, really, there's nothing more to it. It's a key value pair.
+
+The problem more often comes with the usage. Because it's called __hash__ map for a reason
+- The keys are hashes
+- A hash can be anything
+
+And that's the problem. Most of the time, we're using IDs as keys. However, sometimes we want to have some 
+other value. We'd have to define our function to make sure it's unique so we do not overwrite it.
+
+Now, how can we make something faster? Well, consider the following quest:
+- Array has duplicates
+- Array is a subset of another one
+
+Now, for the first one, we could either:
+- Iterate over array and compare all with all
+- Sort the array and find if there are neighbours that are same
+- Use hash map!
+
+So, let's quickly use a hash map:
+```js
+const arr = [1,2,3,2,4,5,6,7];
+const hasDuplicates = () => {
+    const hashMap = {};
+    for (let i = 0; i < arr.length; i++) {
+        const current = arr[i];
+        if (hashMap[current]) {
+            return true;
+        }
+        hashMap[current] = true
+    }
+    return false
+}
+```
+
+With hash maps, we can do it really quickly and easily!
+
+As for the array being subset of another one, let's take a quick look on the approahc:
+- Iterate over one array and compare with items in second array
+- Or use a hash map!
+  - Save the values from bigger array into hash map
+  - Iterate over smaller array
+  - If smaller array contains something that's not in hash map, then return false
+  - Otherwise smaller array is subset
+
+```js
+const arr1 = [1,2,3];
+const arr2 = [4,5,6,1,2,3]
+const isArrSubset = (arr1, arr2) => {
+    const potentialSubset = arr1.length >= arr2.length ? arr2 : arr1;
+    const potentialSuperset = arr1.length >= arr2.length ? arr1 : arr2;
+    const hashMap = {};
+    for (let i = 0; i < potentialSuperset.length; i++) {
+        hashMap[potentialSuperset[i]] = true;
+    }
+    let isSubset = true;
+    for (let i = 0; i < potentialSubset.length; i++) {
+        if (!hashMap[potentialSubset[i]]) isSubset = false
+    }
+    return isSubset
+}
+```
+
+## [Summary](#summary)<span id="summary" />
+
+So, in this part, we've investigated hash maps. Hash maps are very efficient and O(1). We'd like to 
+achieve their speed everywhere. However, sometimes it's not possible. We can at least use them to make 
+things faster.
+
+
+## [References](#references)<span id="references" />
+- [A Common-Sense Guide to Data Structures and Algorithms](https://www.amazon.com/Common-Sense-Guide-Data-Structures-Algorithms/dp/1680502441)

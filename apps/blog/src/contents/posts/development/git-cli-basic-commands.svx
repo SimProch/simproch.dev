@@ -1,0 +1,45 @@
+<script>
+    import Contents from './git-cli-basic-commands';
+    export const contents = Contents
+</script>
+
+# Git CLI basic commands
+
+A cheat sheet curated by yours truly
+
+## [Introduction](#intro)<span id="intro" />
+
+I've been doing this development thing for quite some time now, and every now and then, I run into an obnoxious git issue,
+or I just forget how to delete branch on remote. Luckily, I didn't need to use any additional commands other than those listed below.
+
+I'd strongly encourage anyone looking to understand git a little more to investigate [git for ages 4 and up](https://www.youtube.com/watch?v=1ffBJ4sVUb4)
+as it extremely helped me.
+
+
+## [Cheat-sheet](#cheat-sheet)<span id="cheat-sheet" />
+
+```bash
+git status # Shows the current branch and state
+git branch # Shows the local branches
+git checkout -b <branch_name> # Creates a new branch
+git push -u origin <branch_name> # Creates a new branch on origin based on the one you’re currently at
+git push # Pushes the current changes to currently tracked branch on remote
+git push -d origin branch_name> # Deletes a branch on remote
+git branch -d branch_name> # Deletes a branch
+git checkout <branch_name> # Moves to a specific branch
+git checkout <commit_hash> # Moves to a specific commit
+git merge <branch_name> # merges another branch into the current one
+git reset --soft <commit_hash> # Resets to a specific commit while keeping the changes done (can be used to squash commits)
+git reset --hard <commit_hash> # Resets to a specific commit while discarding the changes
+git log --oneline # Shows the commits and their messages
+git log -p -- path-to-file # Shows the changes in a specific file
+git push origin -d <branch_name> # Deletes a branch on remote
+git show <commit_hash> # Shows changes in a specific commit
+git show <commit_hash> | git apply # Applies changes from a specific commit to current working directory
+git revert <commit_hash> # Reverts a specific commit
+git cat-file -p <commit_hash> # Shows the metadata of specific commit, e.g. to see parents
+git rm -r --cached . # Resets git cache. Extremely useful when renaming uppercase to lowercase
+```
+
+## [References](#references)<span id="references" />
+- [git for ages 4 and up](https://www.youtube.com/watch?v=1ffBJ4sVUb4)

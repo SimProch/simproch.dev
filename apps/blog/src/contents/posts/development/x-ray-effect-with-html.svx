@@ -1,0 +1,59 @@
+<script>
+    import Contents from './x-ray-effect-with-html';
+    import XRaySvg from 'src/components/examples/XRaySvg.svelte';
+    import XRayHtml from 'src/components/examples/XRayHtml.svelte';
+    import XRayHtmlDarkMode from 'src/components/examples/XRayHtmlDarkMode.svelte';
+    export const contents = Contents
+</script>
+
+# X-Ray Effect with HTML
+
+How to create X-Ray effect with HTML only
+
+## [Introduction](#intro)<span id="intro" />
+
+In my time in web development, I've ran across quite a few interesting bits and pieces that I saw but always wondered how they were done. 
+One thing that I especially love is the [X-Ray effect](https://codepen.io/noeldelgado/pen/ByxQjL) using SVG masks. 
+In this post, I'd like to do the same with HTML to try and preview a dark mode.
+
+## [SVG X-Ray effect](#svg-x-ray-effect)<span id="svg-x-ray-effect" />
+
+The X-Ray effect with SVG can be achieved fairly easily. The below example is done by the same code mentioned above:
+
+<XRaySvg />
+
+There's a multitude of ways to do this, but I've chosen to show it as in the example above. To put it simply:
+- 2 SVG images with absolute positioning over one another
+- A SVGCircle element that moves by tracking mouse
+- The SVGCircleElement has transparent fill, meaning the image below is visible
+
+Now, imagine you want to do the same with HTML elements. And let's start with a simple image
+- We can put 2 images that are not SVGs with absolute positioning over one another
+- We don't have any HTML circle element that is not part of SVG.
+
+Therefore, we can't take the same approach to HTML elements. What we can do is use [clip-path](https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path).
+
+## [HTML X-Ray effect](#html-x-ray-effect)<span id="html-x-ray-effect" />
+
+<XRayHtml />
+
+This time, the XRay is achieved with purely HTML. To achieve that, we need to:
+- Have 2 images on top of one another
+- The one we want hidden is under the one that is visible
+- On the hidden element, we apply `clip-path` based on where the mouse is
+
+This X-Ray effect gives us so much more power and we can make some interesting designs out of it!
+
+## [HTML X-Ray effect - Dark mode preview](#html-x-ray-effect-dark-mode)<span id="html-x-ray-effect" />
+
+Now that we've moved out of SVG area, the benefit of doing this on HTML is that we can do it on anything! For example - divs.
+
+<XRayHtmlDarkMode />
+
+Now, this is quite a basic example. However, at this point, you're able to have 2 versions of your page. One in one theme, the other in another. 
+Admittedly, in a large scale projects, this makes the webpage a lot slower as you have to effectively render double items. However, 
+you could always improve upon that.
+
+
+For a way to see how this could be created professionally, visit [the webpage of my old employer](https://www.workwithlogex.com/). There, they've 
+put it together for a hiring page and won an award for it!

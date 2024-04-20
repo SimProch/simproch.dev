@@ -1,0 +1,225 @@
+<script>
+    import Contents from './lets-talk-promises-part-2';
+    export const contents = Contents
+</script>
+
+# Let's talk promises - Part 2
+
+An asynchronous journey
+
+## [Introduction](#intro)<span id="intro" />
+
+In the [previous part](/posts/lets-talk-promises-part-1), we've established what promises are and how they behave in JS. 
+However, in there, I've combined `async/await` ES8 syntax with pure `ES6` promises. In this part, I'd like to go more in detail. 
+The code used in this example is available in the same [GitHub repository](https://github.com/SimProch/lets-talk-promises).
+
+## [Promises without async/await](#no-async-await)<span id="no-async-await" />
+
+I've mentioned that `async/await` came later - specifically 2 years later than `Promises`. 
+In the examples, I've used combination of them to make it simple (and more readable).
+
+While I've used `await` and `try/catch` blocks, `Promises` belong to a group called `Thenables` 
+- that is, an object having `then()` function. `async/await` works with these and 
+all `Promises` are `Thenables` (but not all `Thenables` are `Promises`!). 
+You can read more about it [here](https://masteringjs.io/tutorials/fundamentals/thenable)
+
+So, I mentioned `Promise` has a `then` function. What does it really do? Well - it executes the code after the promise is fulfilled. 
+Similarly, it also has a `catch` function that executes when a Promise is rejected. 
+
+Let's go to our original code of fulfilled/rejected promises:
+
+```js
+(async () => {
+  const myPendingPromise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, 500);
+  });
+  const myFulfilledPromise = new Promise((resolve, reject) => resolve());
+  await myFulfilledPromise;
+  console.log(myFulfilledPromise)
+  try {
+    const myRejectedPromise = new Promise((resolve, reject) => reject());
+    await myRejectedPromise;
+  } catch (e) {
+    console.log(e);
+  }
+})();
+```
+
+Now let's apply the rule of __NOT__ using `async/await`:
+
+```js
+const myPendingPromise = new Promise((resolve, reject) => {
+  setTimeout(resolve, 500);
+});
+console.log(myPendingPromise);
+const myFulfilledPromise = new Promise((resolve, reject) => resolve());
+myFulfilledPromise.then((val) => {
+  console.log(myFulfilledPromise);
+  const myRejectedPromise = new Promise((resolve, reject) => reject());
+  myRejectedPromise.catch((e) => {
+    console.log(e);
+  });
+});
+```
+
+You can see that when not using `async/await`, we get quite a few brackets. Real code works with more promises, so let's add some!
+```js
+const giveMePromise = () => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, 100);
+  });
+};
+
+(async () => {
+  const promise1 = await giveMePromise();
+  const promise2 = await giveMePromise();
+  const promise3 = await giveMePromise();
+  const promise4 = await giveMePromise();
+  const promise5 = await giveMePromise();
+  const promise6 = await giveMePromise();
+  const promise7 = await giveMePromise();
+  const promise8 = await giveMePromise();
+  const promise9 = await giveMePromise();
+  const promise10 = await giveMePromise();
+  console.log('hit after 1 sec')
+})();
+```
+This is how code can look like with async/await. However, if you tried to do the same without async/await:
+```js
+const giveMePromise = () => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, 100);
+  });
+};
+
+const promise = giveMePromise().then(() => {
+  const promise = giveMePromise().then(() => {
+    const promise = giveMePromise().then(() => {
+      const promise = giveMePromise().then(() => {
+        const promise = giveMePromise().then(() => {
+          const promise = giveMePromise().then(() => {
+            const promise = giveMePromise().then(() => {
+              const promise = giveMePromise().then(() => {
+                const promise = giveMePromise().then(() => {
+                  const promise = giveMePromise().then(() => {
+                    console.log("hit after 1 sec");
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+    });
+  });
+});
+```
+
+This is called callback hell and is very obnoxious to write, read and debug. `async/await` helps tremendously with readability.
+
+## [A dangerous await](#dangerous-await)<span id="dangerous-await" />
+
+The last thing I want to share is that `Promises` remember their last state. Consider the following example:
+```js
+const existingPromise = new Promise((resolve, reject) => setTimeout(reject, 1500));
+
+const giveMePromise = () => existingPromise;
+(async () => {
+  await giveMePromise(); // error
+})();
+```
+
+Now, the `Promise` in this case is not created inside the `giveMePromise function` - rather, 
+the `giveMePromise function` only references an existing promise. The `Promise` is created, 
+waits 1.5 seconds, and then gets `rejected`. So, when calling the code above, it'll take 1.5 seconds to execute.
+
+It doesn't matter how many `giveMePromise` calls we have. It will always take only 1.5 seconds. 
+So let's wrap it with a `try/catch` block and add some more calls:
+
+```js
+const existingPromise = new Promise((resolve, reject) =>
+  setTimeout(reject, 1500)
+);
+
+const giveMePromise = () => existingPromise;
+(async () => {
+  try {
+    await giveMePromise();
+    await giveMePromise();
+    await giveMePromise();
+  } catch (e) {
+    console.log(e);
+  }
+})();
+```
+
+Now, in the above code, it will throw an error when the first promise is resolved, and the other calls won't get called. So, let's put them separately:
+
+```js
+const existingPromise = new Promise((resolve, reject) =>
+  setTimeout(reject, 1500)
+);
+
+const giveMePromise = () => existingPromise;
+const inTry = async (promise) => {
+  try {
+    await promise;
+  } catch (e) {
+    console.log(e);
+  }
+};
+(async () => {
+  await inTry(giveMePromise());
+  await inTry(giveMePromise());
+  await inTry(giveMePromise());
+})();
+```
+
+If we run the code above, it will write 3 `console.logs` simultaneously. 
+That is because the `Promise` was rejected once and the state is remembered. 
+Why is it important? Well, let's look what happens if we remove the `try/catch` from 
+the last one:
+
+```js
+const existingPromise = new Promise((resolve, reject) =>
+  setTimeout(reject, 1500)
+);
+
+const giveMePromise = () => existingPromise;
+const inTry = async (promise) => {
+  try {
+    await promise;
+  } catch (e) {
+    console.log(e);
+  }
+};
+(async () => {
+  await inTry(giveMePromise());
+  await inTry(giveMePromise());
+  await giveMePromise()
+})();
+```
+
+With the code above, the first 2 `Promises` are caught. However, the last one is not caught, 
+and it will kill your application.
+
+# [Final words](#summary)<span id="summary" />
+
+`Promises` and `async/await` are powerful tools, but it can be easy to get lost in them. I've put these thoughts down to better remember it.
+I want to put a special emphasis on the following:
+- `Rejected promises` throw an error. An error, if uncaught, can kill your application
+- If you `try/catch` a `rejected Promise` that you don't `await`, it will kill your application
+
+So, if you want you don't want to run into random errors, `await` and `try/catch` your `Promises`!
+
+## [References](#references)<span id="references" />
+- [ES6 Features Promise](http://es6-features.org/#PromiseUsage)
+- [What the heck is the event loop anyway by Philip Roberts](https://www.youtube.com/watch?v=8aGhZQkoFbQ)
+- [Asynchronous Programming by Microsoft](https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/)
+- [JSConf In The Loop by Jake Archibald](https://www.youtube.com/watch?v=cCOL7MC4Pl0)
+- [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE)
+- [ES8 Features Async/Await](https://gist.github.com/rajaramtt/7df3702a04c644b0b62c9a64f48f3dbf#3-ecmascript-2017---es2017---es8)
+- [Thenables in JavaScript](https://masteringjs.io/tutorials/fundamentals/thenable)
+- [Code examples](https://github.com/SimProch/lets-talk-promises)

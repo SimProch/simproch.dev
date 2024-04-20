@@ -1,0 +1,398 @@
+<script>
+    import Contents from './05-node-based-data-structures.json';
+    export const contents = Contents
+</script>
+
+# {Contents.title}
+
+{contents.subtitle}
+
+## [Introduction](#intro)<span id="intro" />
+
+Hello again!
+
+So, in the last chapter, I've gone through recursion, specifically quickselect and quicksort. 
+I'll revisit these at the end of algorithms, as there is more to it.
+
+For the time being, we've learned recursion thanks to these two. So, let's hop right on something more daunting!
+
+## [Node-based Data Structures](#node-based-ds)<span id="node-based-ds" />
+
+When talking about node-based data structures, we don't mean those that are specifically in NodeJS. 
+
+But, it has some ideas to do with JS! Because in JS everything is an object. And we'll be using objects a lot in here.
+
+In this part, I'll be talking about linked lists. They are very similar to arrays. In fact, I've previously used arrays for queues. 
+Here, I might get funky and use linked lists!
+
+## [Linked list](#linked-list)<span id="linked-list" />
+
+In this part, I'll create a [Linked List](https://www.freecodecamp.org/news/implementing-a-linked-list-in-javascript/). But first, some terminology:
+- When we're talking about the __START__ of linked list, we're talking about __HEAD__.
+- When we're talking about the __END__ of linked list, we're talking about __TAIL__.
+
+A linked list is fairly simple - it's values leading one to another:
+```js
+const linkedList = {
+    head: {
+        value: 1,
+        next: {
+            value: 2,
+            next: {
+                value: 3,
+                next: {
+                    value: 4,
+                    next: {
+                        value: 5
+                        next: null
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+Now, that looks horrible. However, there are some benefits to it.
+- During addition or removal, we do not need to reorganize the entire data structure
+- We only need to link 2 elements together
+
+Now, that's an important benefit. Remember when I was talking about queues? There, adding to queue is O(N) because we need to 
+shift all elements. However, in here, we can just remove the first element and link it to the HEAD. That'd be O(1)!
+
+But, as is always the case, there's quite a bit of disadvantages:
+- Search operations are slow - there is no random access (imagine sorting it)
+- Uses more memory due to pointers (memory is spread all over the computer)
+
+So, let's quickly create one. For clarity, I'll use TypeScript in this part.
+
+```ts
+class LinkedListNode {
+    nextNode: LinkedListNode;
+    data: any;
+
+    constructor(data) {
+        this.data = data;
+    }
+}
+```
+
+Now, this is the smallest building block. Individiual nodes all have these values. The interesting part are the operations.
+- Reading a specific node (e.g. nth node)
+- Finding a specific node (i.e. retrieving the index)
+- Insertion & Deletion
+
+So, let's create a Linked List using nodes!
+
+```ts
+class LinkedList {
+    head: LinkedListNode
+    constructor(firstNode: LinkedListNode) {
+        this.head = firstNode
+    }
+}
+```
+
+It's as simple as that. Now, to allow for some reading or finding, let's insert some nodes! Keep in mind 2 things:
+- We can insert the node anywhere. So we'll be inserting to an index
+- We can also insert to the start. A linked list is created by default with a __head__ node.
+
+```ts
+function insert(index: number, dataToAdd: any) {
+    const nodeToAdd = new LinkedListNode(dataToAdd);
+    if (index === 0) {
+        nodeToAdd.nextNode = this.head;
+        this.head = noteToAdd
+        return;
+    }
+    let currentNode = this.firstNode;
+    let index = 0;
+    while (currentIndex < indexToFind) {
+        currentNode = currentNode.nextNode;
+        currentIndex++;
+        if (currentNode == null) return null;
+    }
+    nodeToAdd.nextNode = currentNode.nextNode;
+    currentNode.nextNode = nodeToAdd;
+}
+```
+
+Cool! We've managed to do an insertion! Let's go through it:
+- First, we need to see if the index is 0. If we want to insert to the head, we're changing the only reference 
+in the class (__head__). We need to do it separately
+- In other case, we'll move through the entire Linked List and find the position. If the index is bigger than length, we don't add anything
+- Finally, the addition of the node is just setting the links `nextNode` on current and next node
+
+There are 2 very important bits to remember:
+- search for node using while loop
+- changing the links rather than nodes themselves (except for __head__)
+
+So! Now that we can insert to it, we can perform some reading! Let's print all our nodes!
+
+```ts
+function printAll() {
+    let node = this.head;
+    while (node.nextNode) {
+        console.log(node.data)
+        node = node.nextNode
+    }
+}
+```
+
+Now, similarly, we can retrieve only the last node!
+```ts
+function getLast() {
+    let node = this.head;
+    while (node.nextNode) {
+        if (node.nextNode == null) return node.data
+    }
+}
+```
+
+Fantastic! We're now able to insert and traverse. We can also get the last node! But what if we want to:
+- retrieve node by value
+- retrieve node by index
+
+Well, let's quickly do these, it will be similar:
+```ts
+function read(indexToFind) {
+    let node = this.head;
+    let index = 0;
+    while (index < indexToFind) {
+        node = node.nextNode
+        if (!node) return null
+    }
+    return node.data
+}
+
+function findIndex(itemToFind) {
+    let node = this.head;
+    let index = 0;
+    while (node.data !== itemToFind) {
+        node = node.nextNode;
+        index++;
+        if (!node) return null;
+    }
+    return index;
+}
+```
+
+Great! We can do that as well! As we see, it's pretty much the same thing, just different condition. Let's recap:
+- Insertion
+- Traversing
+- Deletion
+
+Soo, we're missing deletion! Let's deal with that as well. Remember - we're only changing links!
+
+```ts
+function delete(indexToDelete) {
+    if (index == 0) { 
+        this.firstNode = this.firstNode.nextNode;
+        return;
+    }
+
+    let index = 0;
+    while (index < indexToDelete - 1) {
+        currentNode = currentNode.nextNode;
+        index++;
+        if (!currentNode) return null;
+    }
+    currentNode.nextNode = currentNode.nextNode.nextNode
+}
+```
+
+Note specifically the last line. To delete a node, we need to start from the one BEFORE
+- We want to just change "unlink" the element to delete
+- We can't do that from within the deleted node
+
+## [Linked List Full Code](#linked-list-code)<span id="linked-list-code" />
+
+Below, the entire code together can be seen:
+
+```ts
+class LinkedListNode {
+  data: unknown;
+  constructor(data: unknown) {
+    this.data = data;
+  }
+
+  nextNode: LinkedListNode;
+}
+
+class LinkedList {
+  firstNode: LinkedListNode;
+  constructor(firstNode: LinkedListNode) {
+    this.firstNode = firstNode;
+  }
+
+  read(indexToFind) {
+    let currentNode = this.firstNode;
+    let currentIndex = 0;
+    while (currentIndex < indexToFind) {
+      currentNode = currentNode.nextNode;
+      currentIndex++;
+      if (!currentNode) return null;
+    }
+    return currentNode.data;
+  }
+
+  findIndex(itemTofind) {
+    let currentNode = this.firstNode;
+    let currentIndex = 0;
+    while (currentNode.data !== itemTofind) {
+      currentNode = currentNode.nextNode;
+      currentIndex++;
+      if (!currentNode) return null;
+    }
+    return currentIndex;
+  }
+
+  insert(indexToFind, dataToAdd) {
+    const nodeToAdd = new LinkedListNode(dataToAdd);
+    if (indexToFind == 0) {
+      nodeToAdd.nextNode = this.firstNode;
+      this.firstNode = nodeToAdd;
+      return;
+    }
+    let currentNode = this.firstNode;
+    let currentIndex = 0;
+    while (currentIndex < indexToFind) {
+      currentNode = currentNode.nextNode;
+      currentIndex++;
+      if (!currentNode) return null;
+    }
+    nodeToAdd.nextNode = currentNode.nextNode;
+    currentNode.nextNode = nodeToAdd;
+  }
+
+  delete(index) {
+    if (index === 0) {
+      this.firstNode = this.firstNode.nextNode;
+      return;
+    }
+    let currentNode = this.firstNode;
+    let currentIndex = 0;
+    while (currentIndex < index - 1) {
+      currentNode = currentNode.nextNode;
+      currentIndex++;
+      if (!currentNode) return null;
+    }
+    const nodeAfterDeletedNode = currentNode.nextNode?.nextNode;
+    currentNode.nextNode = nodeAfterDeletedNode;
+  }
+
+  printAll() {
+    let currentNode = this.firstNode;
+    while (currentNode) {
+      console.log(currentNode.data);
+      currentNode = currentNode.nextNode;
+      if (!currentNode) return;
+    }
+  }
+
+  findLast() {
+    let currentNode = this.firstNode;
+    while (currentNode) {
+      currentNode = currentNode.nextNode;
+      if (!currentNode.nextNode) return currentNode.data;
+    }
+  }
+}
+```
+
+Note one thing. With the current insertion, we can only insert into a body. We'd need a separate function to insert to the tail.
+
+## [Reversing](#linked-list-reverse)<span id="linked-list-reverse" />
+
+We've got one last thing to cover - reversing the linked list. If you think about it, reversing should be really hard, right?
+
+Well, it's actually fairly easy. We are still just changing the links. So, we'll slowly push the head to the end!
+
+```ts
+function reverse() {
+    let currentNode = this.firstNode;
+    let prevNode;
+    while (currentNode) {
+        const nextNode = currentNode.nextNode;
+        currentNode.nextNode = previousNode;
+        previousNode = currentNode;
+        currentNode = nextNode;
+    }
+    this.firstNode = prevNode;
+}
+```
+
+Now, to reverse it, we'll basically:
+- Store temporarily the next node
+- Set the next node as previous node (undefined the first time)
+- Define the previous node as current node
+- Set the current node as next node
+
+So, we'll basically reverse it! 
+
+## [Doubly linked list](#doubly-linked-list)<span id="doubly-linked-list" />
+
+Now that we've gone through a linked list, we've found that having a two-way link would be beneficial. Luckily, that's easy.
+
+Because it's all just reference of pointers in memory, we do not need to allocate any more memory. The doubly linked list can have following nodes:
+
+```js
+class LinkedListNode {
+    __nextNode;
+    constructor(data) {
+        this.data = data;
+    }
+
+    get nextNode() { 
+        return this.__nextNode;
+    }
+    set nextNode(val) {
+        this.__nextNode = val;
+        val.previousNode = this;
+    }
+    previousNode;
+}
+```
+
+Now that we have link to both nodes, deletion may be faster. However, we can also start from the end! In this case, that's when 
+tail comes in play!
+- We can keep a reference to the end
+- Addition to both start and end is O(1)
+- Searching is O(N / 2) if we know the index (we can go from start to end, or from end to start)
+- Reversing is not an issue because we can go both ways!
+
+And now, finally, putting it all together, we can do a simple queue with this doubly linked list!
+```js
+class Queue {
+    queue
+
+    constructor() {
+        this.queue = new DoublyLinkedList();
+    }
+
+    enqueue(data) {
+        this.queue.insertAtEnd(data)
+    }
+
+    dequeue() {
+        this.queue.deleteFromStart();
+    }
+
+    read() {
+        return this.queue.read();
+    }
+}
+```
+
+## [Summary](#summary)<span id="summary" />
+
+In this part, I've gone through a linked list. We've found that it's very similar to arrays, if we forget how they look like in JS
+- Both can form queues
+- Linked list can form an even more effective queue
+- Linked list takes more memory
+
+None the less, this traversing of nodes will soon prove to be extremely useful, as we're slowly moving towards trees and graphs!
+
+## [References](#references)<span id="references" />
+- [A Common-Sense Guide to Data Structures and Algorithms](https://www.amazon.com/Common-Sense-Guide-Data-Structures-Algorithms/dp/1680502441)
+- [Linked List in JS](https://www.freecodecamp.org/news/implementing-a-linked-list-in-javascript/)

@@ -1,0 +1,9 @@
+{
+	"id": "6-system-design-key-value-store",
+	"date": "12. 11. 2023",
+	"title": "System Design 6 - Key Value Store",
+	"subtitle": "To Reinvent Redis Cache",
+	"tags": ["system-design", "system", "design"],
+	"description": "Sixth part is an attempt to create a key value store, similar to redis.",
+	"breadcrumbs": "System Design"
+}

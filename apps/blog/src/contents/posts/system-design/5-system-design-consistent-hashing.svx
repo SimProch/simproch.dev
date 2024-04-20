@@ -1,0 +1,171 @@
+<script>
+    import Contents from './5-system-design-consistent-hashing.json';
+    export const contents = Contents
+</script>
+
+# {Contents.title}
+
+{contents.subtitle}
+
+## [Introduction](#intro)<span id="intro" />
+
+So, at the start, I've gone through the tooling and said we have all we need. And yet, in rate limiters, I've talked about algorithms.
+
+Well, there are some tools we need to understand some more before using them in proper design. And consistent hashing is one of them as well.
+
+## [Data in multiple caches](#data-in-multiple-caches)<span id="data-in-multiple-caches" />
+
+Let's rewind a bit. We've talked about saving data to cache because it is fast. But why is it fast? Well, because it's (at least partially) 
+in memory. What does it mean?
+
+Well, let's consider the following JS code:
+
+```js
+const keyValueStore = {};
+const get = (id) => keyValueStore[id];
+const set = (value) => {
+    const id = Object.keys(keyValueStore).length
+    keyValueStore[id] = value;
+}
+
+export { keyValueStore }
+```
+
+This very simple JS code allows us to create a hash table. Whenever data is added, it's put in an object. For the lifetime of the application, 
+the object will be accessible and we can use it as cache. The data is stored in memory.
+
+Now, of course there are limits to this. You can't store the entire world in it. For example, just now I tried and got the error at 112 million items.
+
+So, we got to a limit. To add more items, the next steps would be:
+- scale vertically, raising the RAM on my machine
+- scale horizontally, adding additional computers
+
+Well, let's consider that getting another machine is less costly - because it may be (and likely will be at some point) in the case of system design.
+
+So, I'm gonna add 2 more computers to be able to store 300 millions of data. Well, how do I do that now? Let's list the problems:
+- When we add another machine, if I'd still call just this machine, it would be useless. We already solved for that previously - load balancer
+- However, now that we get the ID, we work with the size of the keyValueStore. But it can be different on 2 machines because each will hold different amount
+
+So, to work with that, we'll need to somehow add the machine identifier in there! With two machines, we could store on even and odd numbers. With more, we'd be doing the same - 
+modulo operator, but with number of machines.
+
+```js
+const serverIndex = getCurrentServerIndex()
+const set = (value) => {
+    const id = Object.keys(keyValueStore).length * serverIndex + serverIndex
+    keyValueStore[id] = value
+}
+```
+
+A function above is something that could be used. We know the server we're using, so we would be using that, and use it to calculate where to store.
+
+Now, the next step would be to retrieve it. Say you are retrieving a data where index is `10`. How would you know that? 
+Well, since you know the amount of servers, then the server index is `10 % 3` => 1. Would it work then? If we have 3 servers, then it would:
+- `server0` stores `0,3,6,9`
+- `server1` stores `1,4,7,10`
+- `server2` stores `2,5,8,11`
+
+So, now we have a way to retrieve data from specific server. Note a couple things:
+- the data is stored in each server in this way. `server2` doesn't have `0` or `1`. There is no reason for the individual stores to keep them like this
+- the storage on individual servers can be done with just the length. The problem is more about __knowing which store to save to/fetch from__ rather than the insides
+- I've made this example this way intentionally to keep it simple. You are likely to generate a new [hash](https://en.wikipedia.org/wiki/List_of_hash_functions) for each item, and then work with modulos only
+
+So, now that we know the identifier we use and number of servers, we can define a function to know on WHICH server the data should be stored:
+
+> `serverIndex = hash(key) % numberOfServers`
+
+This server index would then be used to both save and retrieve data.
+
+```js
+const currentValue = getDataFromServer(serverIndex, hash(key)) 
+const saveDataToServer = saveDataToCache(serverIndex, hash(key))
+```
+
+In both cases, the `hash(key)` would be used as identifier in the key value store.
+
+## [What is Consistent Hashing](#what-is-consistent-hashing)<span id="what-is-consistent-hashing" />
+
+So, we've found that it's easy to work with a single server, if it fits our needs. But, when working with multiple servers, we may encounter issues when saving and fetching them.
+
+Now, we have another big issue. Because system design is all about scaling our system and its individual parts. 
+We've gone through scaling individual parts of the system previously, but didn't talk about the issues it entails.
+
+Imagine that you have a traffic burst. Well, what we mentioned before is we would add servers. So what would happen here?
+
+Well, we are counting with the number of servers. So, the function would work fine... if it didn't have any data saved.
+
+Imagine the following scenario:
+- You start of with 3 servers, having already saved values into `server0` being `0, 3, 6, 9, 12, 15`
+- You then switch to 6 server. The first value to be saved in `server5` would be `6`. But that already is in `server0`!
+
+You'd run into issues with consistency. And that is what consistent hashing is about - resolving these issues.
+
+## [Hash key rings](#hash-key-rings)<span id="hash-key-rings" />
+
+When we search for consistent hashing on google, we could run into the following [Wikipedia page](https://en.wikipedia.org/wiki/Consistent_hashing). 
+In there, we could see an image of ring containing many servers.
+
+<img src="/images/system-design/hashing-ring.png" alt="Hashing ring" title="Hashing ring" class="image" loading="lazy" />
+
+This circle contains 5 different servers at different points. So how does that help us?
+
+Well, this ring is basically what we've already built above. While we were working with numerical IDs that we were autoincrementing, 
+you could imagine this being a predefined space upon which the server is chosen. From the image above:
+- The first server is on space 0-74 inclusive. Whenever a hash is in this range, first server is chosen for the operation
+- The second server is on space of 75-139 inclusive. Whenever a hash is in this range, the second server is chosen for the operation.
+
+You get the idea. Now, why is it important to make this into a circle? Well, it's not, but it's easier to visualize how we can deal with server being down.
+
+Imagine that in the image, the first server is removed. What happens with the values so that we can ensure consistency?
+- A server at 0-74 is removed
+- The first space becomes 0-139
+- The originally second server now contains all these values and deals with requests
+
+Now, what if we add a server? Well, the same thing
+- First server is at 0-74
+- Another server is added to 30-74
+- Some of the values are kept on the original server, some of them are moved
+- We can still mathematically decide which server to use by the same math function
+
+As mentioned before, a hash is used more often than numeric IDs. By giving some boundaries to the hash (e.g. the highest value it can reach), then you can 
+spread your servers as much as you want.
+
+By doing this, we've achieved some consistency. We can add or remove servers as we go and not lose the data and keep it fast.
+
+## [Even distribution](#even-distribution)<span id="even-distribution" />
+
+So, we have 5 servers. But now, we're just hoping that our hash function generates roughly same results. Because it can be the case that 90 % of 
+the values fall into one server, which is something we do not want.
+
+Keep in mind that on the ring, we have each server on the ring. But these servers are not really in circles, it's just an abstract concept.
+
+So, what we're saying is - We allocate a range of hashes to a specific physical server. It just happens to be a single range. What if we added multiple ranges?
+
+That concept is called [virtual nodes](https://liuzhenglaichn.gitbook.io/system-design/advanced/consistent-hashing). There are many different vizualizations, 
+and I found the written one to be easiest.
+
+Effectivelly, what is happening is we're gonna assign multiple spaces on the ring to the real servers. So, imagine the circle before, and consider the first server:
+- Previously, we've allocated all at 0-74 to the first server.
+- Now, we're gonna allocate:
+  - 0-20 to first server
+  - 21-40 to second server
+  - 41-60 to third server
+  - 61-74 to fourth server
+
+What we'll do is we basically split the circle into smaller chunks, and allocate the smaller chunks to physical servers. This way, a single 
+server can have multiple nodes
+
+<img src="/images/system-design/node-ring-distribution.png" alt="Ring distribution" title="Ring distribution" class="image" loading="lazy" />
+
+Note that your values when having 10s of millions DAU, you may need something bigger. We could have 10 servers with each having 200 virtual nodes. We just need to tune it properly.
+
+## [Summary](#summary)<span id="summary" />
+
+In this part, we've dealt with consistent hashing and learned how to approach designing consistent data stores across servers.
+
+While this was purely for hashes, we'll see this concept often repeating everywhere, and it's important to understand this as good as possible
+
+# [References](#references)<span id="references" />
+- [System Design Interview book](https://www.amazon.com/System-Design-Interview-insiders-Second/dp/B08CMF2CQF)
+- [List of hashing functions](https://en.wikipedia.org/wiki/List_of_hash_functions)
+- [Consistent Hashing on Wikipedia](https://en.wikipedia.org/wiki/Consistent_hashing)
