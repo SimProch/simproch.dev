@@ -30,24 +30,5 @@ export const base = {
 	tags: {
 		title: 'Tags',
 		subtitle: 'Filter on posts by tags'
-	},
-	footer: {
-		title: 'Simon Prochazka',
-		subtitle: 'Cracking business puzzles through software craftsmanship.',
-		socials: [
-			{ name: 'github-white', linkTo: 'https://github.com/SimProch' },
-			{
-				name: 'linkedin-white.ico',
-				linkTo: 'https://www.linkedin.com/in/simon-prochazka-profile/'
-			},
-			{
-				name: 'twitter.ico',
-				linkTo: 'https://twitter.com/SimProch'
-			},
-			{
-				name: 'stack-overflow.ico',
-				linkTo: 'https://www.linkedin.com/in/simon-prochazka-profile/'
-			}
-		]
-	} as Footer
+	}
 };

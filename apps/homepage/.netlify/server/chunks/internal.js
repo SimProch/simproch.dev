@@ -122,7 +122,7 @@ const options = {
   root: Root,
   service_worker: false,
   templates: {
-    app: ({ head, body, assets: assets2, nonce, env }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="' + assets2 + '/favicon.ico" />\n		<!-- FONTS -->\n		<link rel="preconnect" href="https://fonts.googleapis.com" />\n		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />\n		<link\n			href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;700&display=swap"\n			rel="stylesheet"\n		/>\n		<meta charset="utf-8" />\n		<meta http-equiv="X-UA-Compatible" content="IE=edge" />\n		<meta name="viewport" content="width=device-width, initial-scale=1" />\n		<title>Simon Prochazka | Developer</title>\n		<meta name="description" content="JavaScript & TypeScript full stack developer, mentor" />\n		<meta\n			name="keywords"\n			content="simon, prochazka, czech, developer, mentor, portfolio, javascript, typescript"\n		/>\n		<meta name="author" content="Simon Prochazka" />\n		<meta property="og:title" content="Simon Prochazka | Full Stack Developer" />\n		<meta property="og:description" content="JavaScript & TypeScript full stack developer and mentor" />\n		<meta property="og:image" content="https://simproch.dev/simproch.jpeg" />\n		<meta property="og:url" content="https://simproch.dev" />\n		<meta property="og:type" content="website" />\n		' + head + '\n	</head>\n	<body data-sveltekit-preload-data="hover" style="margin: 0 !important">\n		<div style="display: contents">' + body + "</div>\n	</body>\n</html>\n",
+    app: ({ head, body, assets: assets2, nonce, env }) => '<!doctype html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="' + assets2 + '/favicon.ico" />\n		<!-- FONTS -->\n		<link rel="preconnect" href="https://fonts.googleapis.com" />\n		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />\n		<link\n			href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;700&display=swap"\n			rel="stylesheet"\n		/>\n		<meta charset="utf-8" />\n		<meta http-equiv="X-UA-Compatible" content="IE=edge" />\n		<meta name="viewport" content="width=device-width, initial-scale=1" />\n		<title>Simon Prochazka | Developer</title>\n		<meta name="description" content="JavaScript & TypeScript full stack developer, mentor" />\n		<meta\n			name="keywords"\n			content="simon, prochazka, czech, developer, mentor, portfolio, javascript, typescript"\n		/>\n		<meta name="author" content="Simon Prochazka" />\n		<meta property="og:title" content="Simon Prochazka | Full Stack Developer" />\n		<meta\n			property="og:description"\n			content="JavaScript & TypeScript full stack developer and mentor"\n		/>\n		<meta property="og:image" content="https://simproch.dev/simproch.jpeg" />\n		<meta property="og:url" content="https://simproch.dev" />\n		<meta property="og:type" content="website" />\n		' + head + '\n	</head>\n	<body data-sveltekit-preload-data="hover" style="margin: 0 !important">\n		<div style="display: contents">' + body + "</div>\n	</body>\n</html>\n",
     error: ({ status, message }) => '<!doctype html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + `</title>
 
 		<style>
@@ -194,7 +194,7 @@ const options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "1clug4c"
+  version_hash: "re435"
 };
 async function get_hooks() {
   return {};

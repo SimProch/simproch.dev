@@ -1,5 +1,5 @@
 <script lang="ts">
-	import MouseIndicator from '../MouseIndicator.svelte';
+	import { MouseIndicator } from '@simproch-dev/ui';
 
 	export let data: { title: string; subtitle: string; breadcrumbs?: string | undefined };
 	export let id: 'home' | 'experience' = 'home';

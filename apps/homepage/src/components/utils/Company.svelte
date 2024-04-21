@@ -1,24 +1,23 @@
 <script lang="ts">
-	import LinkButton from './LinkButton.svelte';
+	import { LinkButton } from '@simproch-dev/ui';
+
 	export let imagePath: string;
 	export let title: string;
 	export let content: string;
 </script>
 
-
-	<div class="experience flex-col">
-		<div class="experience__company flex-row flex-row--center">
-			<img src={`/images/company-logos/${imagePath}.png`} alt={`${title} logo`} />
-			<p class="experience__company__description">{content}</p>
-		</div>
-		<div class="experience__know-more">
-			<div class="experience__know-more__empty"></div>
-			<div class="experience__know-more__link">
-				<LinkButton name="Know more" linkTo={imagePath} />
-			</div>
+<div class="experience flex-col">
+	<div class="experience__company flex-row flex-row--center">
+		<img src={`/images/company-logos/${imagePath}.png`} alt={`${title} logo`} />
+		<p class="experience__company__description">{content}</p>
+	</div>
+	<div class="experience__know-more">
+		<div class="experience__know-more__empty"></div>
+		<div class="experience__know-more__link">
+			<LinkButton name="Know more" linkTo={imagePath} />
 		</div>
 	</div>
-
+</div>
 
 <style lang="scss">
 	$max-width: 1000px;

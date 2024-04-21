@@ -1,7 +1,5 @@
 <script lang="ts">
-	import LinkButton from './LinkButton.svelte';
-	import SkillButton from './SkillButton.svelte';
-
+	import { SkillButton, LinkButton } from '@simproch-dev/ui';
 	type DataType = {
 		overview: {
 			title: string;
@@ -20,34 +18,32 @@
 	export let data: DataType;
 </script>
 
-
-	<section class="flex-col flex-col--center wrapper">
-		<div class="base-width flex-col">
-			<div class="flex-col overview">
-				<h2>{data.overview.title}</h2>
-				<div class="overview__text">
-					{#each data.overview.textBlocks as textBlock}
-						<p>{textBlock}</p>
-					{/each}
-				</div>
-			</div>
-
-			<div class="flex-col skills">
-				<h3>{data.skills.title}</h3>
-				<div class="skill__list">
-					{#each data.skills.skills as skill}
-						<SkillButton name={skill.name} linkTo={skill.linkTo} />
-					{/each}
-				</div>
-			</div>
-			<div class="flex-row">
-				{#each data.actions as action}
-					<LinkButton name={action.name} linkTo={action.linkTo} />
+<section class="flex-col flex-col--center wrapper">
+	<div class="base-width flex-col">
+		<div class="flex-col overview">
+			<h2>{data.overview.title}</h2>
+			<div class="overview__text">
+				{#each data.overview.textBlocks as textBlock}
+					<p>{textBlock}</p>
 				{/each}
 			</div>
 		</div>
-	</section>
 
+		<div class="flex-col skills">
+			<h3>{data.skills.title}</h3>
+			<div class="skill__list">
+				{#each data.skills.skills as skill}
+					<SkillButton name={skill.name} linkTo={skill.linkTo} />
+				{/each}
+			</div>
+		</div>
+		<div class="flex-row">
+			{#each data.actions as action}
+				<LinkButton name={action.name} linkTo={action.linkTo} />
+			{/each}
+		</div>
+	</div>
+</section>
 
 <style lang="scss">
 	section {

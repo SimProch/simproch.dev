@@ -9,10 +9,10 @@ function __memo(fn) {
 return {
 	appDir: "_app",
 	appPath: "_app",
-	assets: new Set(["favicon.png"]),
-	mimeTypes: {".png":"image/png"},
+	assets: new Set([".DS_Store","favicon.ico","images/.DS_Store","images/company-logos/green-fox-academy.png","images/company-logos/level-works.png","images/company-logos/logex-solution-centre.png","images/logo.png","robots.txt","simproch.jpeg","sitemap.xml"]),
+	mimeTypes: {".png":"image/png",".txt":"text/plain",".jpeg":"image/jpeg",".xml":"text/xml"},
 	_: {
-		client: {"start":"_app/immutable/entry/start.BO8Y_6Xy.js","app":"_app/immutable/entry/app.bvwuck9N.js","imports":["_app/immutable/entry/start.BO8Y_6Xy.js","_app/immutable/chunks/entry.CaXt8yT6.js","_app/immutable/chunks/scheduler.CszYcmUU.js","_app/immutable/entry/app.bvwuck9N.js","_app/immutable/chunks/scheduler.CszYcmUU.js","_app/immutable/chunks/index.BDdUIQCS.js"],"stylesheets":[],"fonts":[],"uses_env_dynamic_public":false},
+		client: {"start":"_app/immutable/entry/start.GMfbw7s-.js","app":"_app/immutable/entry/app.DKNXJEAv.js","imports":["_app/immutable/entry/start.GMfbw7s-.js","_app/immutable/chunks/entry.N1c75MCP.js","_app/immutable/chunks/scheduler.CC5rdfI7.js","_app/immutable/entry/app.DKNXJEAv.js","_app/immutable/chunks/scheduler.CC5rdfI7.js","_app/immutable/chunks/index.CTmbN1ep.js"],"stylesheets":[],"fonts":[],"uses_env_dynamic_public":false},
 		nodes: [
 			__memo(() => import('../server/nodes/0.js')),
 			__memo(() => import('../server/nodes/1.js')),

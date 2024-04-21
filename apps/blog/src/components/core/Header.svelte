@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { DynamicIcon } from '@simproch-dev/ui';
 	import type { CategoryId } from 'src/contents/base';
-	import DynamicIcon from './DynamicIcon.svelte';
 	import { nav } from 'src/contents/contents';
 
 	let active = $page.params.category as CategoryId;

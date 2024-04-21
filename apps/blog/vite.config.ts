@@ -8,7 +8,7 @@ export default defineConfig({
   },
   build: {
     commonjsOptions: {
-      include: [/@repo-ui/, /node_modules/],
+      include: [/@simproch-dev-ui/, /node_modules/],
     },
   },
 });

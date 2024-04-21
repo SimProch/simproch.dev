@@ -10,14 +10,13 @@
 
 	$: {
 		currentContent = Contents[$page.params.category as CategoryId];
-		console.log(currentContent);
 	}
 </script>
 
 <Meta
 	title={`${currentContent ? currentContent.title : ''} | Simon Prochazka | Developer`}
-	keywords={`tags, ${getTagsFromPosts(currentContent.posts ?? []).join(", ")}, blog, simon, prochzka`}
-	description={`Posts containing ${getTagsFromPosts(currentContent.posts ?? []).join(", ")}`}
+	keywords={`tags, ${getTagsFromPosts(currentContent.posts ?? []).join(', ')}, blog, simon, prochzka`}
+	description={`Posts containing ${getTagsFromPosts(currentContent.posts ?? []).join(', ')}`}
 />
 
 <Body>

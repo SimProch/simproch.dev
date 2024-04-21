@@ -1,5 +1,5 @@
 {
-  "name": "@repo/ui",
+  "name": "@simproch-dev/ui",
   "version": "0.0.0",
   "type": "module",
   "module": "index.ts",
@@ -14,7 +14,7 @@
     "lint": "eslint ."
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
+    "@simproch-dev/config-eslint": "*",
     "svelte": "^4.2.12"
   }
 }

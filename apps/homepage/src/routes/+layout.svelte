@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { Footer } from '@simproch-dev/ui';
 	import Header from '../components/root/Header.svelte';
-	import Footer from '../components/root/Footer.svelte';
 	import { d } from '../contents/of-no-importance';
 
 	d.forEach((i) => console.log(i));

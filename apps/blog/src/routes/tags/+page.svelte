@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { tags } from 'src/contents/contents';
 	import Body from 'src/components/core/Body.svelte';
-	import LinkButton from 'src/components/buttons/LinkButton.svelte';
 	import Meta from 'src/components/core/Meta.svelte';
+	import { LinkButton } from '@simproch-dev/ui';
 </script>
 
 <Meta

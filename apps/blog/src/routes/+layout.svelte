@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Footer from 'src/components/core/Footer.svelte';
+	import { Footer } from '@simproch-dev/ui';
 	import Header from 'src/components/core/Header.svelte';
 
 	const timeoutInMs = 1000 * 60;
@@ -295,49 +295,6 @@
 					opacity: 0.4;
 				}
 			}
-
-			// 	@keyframes easterEgg {
-			// 		0% {
-			// 			top: 34%;
-			// 			left: 52%;
-			// 		}
-			// 		8.3% {
-			// 			top: 52%;
-			// 			left: calc(100% - $size);
-			// 		}
-			// 		24.9% {
-			// 			top: 85%;
-			// 			left: 0;
-			// 		}
-			// 		30% {
-			// 			top: calc(100% - $size);
-			// 			left: 27%;
-			// 		}
-			// 		41.5% {
-			// 			top: 70%;
-			// 			left: calc(100% - $size);
-			// 		}
-			// 		58.1% {
-			// 			top: 55%;
-			// 			left: 0;
-			// 		}
-			// 		74.7% {
-			// 			top: 13%;
-			// 			left: calc(100% - $size);
-			// 		}
-			// 		79% {
-			// 			top: 0px;
-			// 			left: 70%;
-			// 		}
-			// 		91.3% {
-			// 			top: 22%;
-			// 			left: 25px;
-			// 		}
-			// 		100% {
-			// 			top: 34%;
-			// 			left: 52%;
-			// 		}
-			// 	}
 		}
 	}
 </style>

@@ -19,24 +19,33 @@
       "_internal.js"
     ]
   },
-  "_Company.svelte_svelte_type_style_lang.js": {
-    "file": "_app/immutable/assets/Company.B_SY1GJM.css",
-    "src": "_Company.svelte_svelte_type_style_lang.js"
-  },
   "_Detail.js": {
     "file": "chunks/Detail.js",
     "name": "Detail",
     "imports": [
       "_ssr.js",
+      "_TitleBlock.js"
+    ],
+    "css": [
+      "_app/immutable/assets/Detail.Dp-hJ7HF.css",
+      "_app/immutable/assets/Footer.5IfJ6qmx.css"
+    ]
+  },
+  "_Footer.svelte_svelte_type_style_lang.js": {
+    "file": "_app/immutable/assets/Footer.5IfJ6qmx.css",
+    "src": "_Footer.svelte_svelte_type_style_lang.js"
+  },
+  "_TitleBlock.js": {
+    "file": "chunks/TitleBlock.js",
+    "name": "TitleBlock",
+    "imports": [
+      "_ssr.js",
       "_client.js"
     ],
     "css": [
-      "_app/immutable/assets/TitleBlock.Bv67cU6B.css"
+      "_app/immutable/assets/TitleBlock.BUY42zGz.css",
+      "_app/immutable/assets/Footer.5IfJ6qmx.css"
     ]
-  },
-  "_TitleBlock.svelte_svelte_type_style_lang.js": {
-    "file": "_app/immutable/assets/TitleBlock.Bv67cU6B.css",
-    "src": "_TitleBlock.svelte_svelte_type_style_lang.js"
   },
   "_client.js": {
     "file": "chunks/client.js",
@@ -80,9 +89,8 @@
       "_client.js"
     ],
     "css": [
-      "_app/immutable/assets/_layout.nlPeQVTR.css",
-      "_app/immutable/assets/TitleBlock.Bv67cU6B.css",
-      "_app/immutable/assets/Company.B_SY1GJM.css"
+      "_app/immutable/assets/_layout.CjOXX80O.css",
+      "_app/immutable/assets/Footer.5IfJ6qmx.css"
     ]
   },
   "src/routes/+page.svelte": {
@@ -92,11 +100,12 @@
     "isEntry": true,
     "imports": [
       "_ssr.js",
+      "_TitleBlock.js",
       "_client.js"
     ],
     "css": [
-      "_app/immutable/assets/TitleBlock.Bv67cU6B.css",
-      "_app/immutable/assets/Company.B_SY1GJM.css"
+      "_app/immutable/assets/_page.OiG77YJm.css",
+      "_app/immutable/assets/Footer.5IfJ6qmx.css"
     ]
   },
   "src/routes/green-fox-academy/+page.svelte": {
@@ -106,6 +115,7 @@
     "isEntry": true,
     "imports": [
       "_ssr.js",
+      "_TitleBlock.js",
       "_Detail.js"
     ]
   },
@@ -116,6 +126,7 @@
     "isEntry": true,
     "imports": [
       "_ssr.js",
+      "_TitleBlock.js",
       "_Detail.js"
     ]
   },
@@ -126,6 +137,7 @@
     "isEntry": true,
     "imports": [
       "_ssr.js",
+      "_TitleBlock.js",
       "_Detail.js"
     ]
   }

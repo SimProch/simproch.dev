@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
+	import { goto, replaceState } from '$app/navigation';
 	import { page } from '$app/stores';
-	import DynamicIcon from '../utils/DynamicIcon.svelte';
+	import { DynamicIcon } from '@simproch-dev/ui';
 	const nav: Array<{ path: string; name: string }> = [
 		{ path: 'home', name: 'Home' },
 		{ path: 'about', name: 'About' },
@@ -60,12 +60,11 @@
 			top,
 			behavior: 'smooth'
 		});
-		window.history.replaceState({}, '', selector);
+		replaceState(selector, {});
 		return false;
 	};
 
 	const onScroll = (e: Event) => {
-		const html = (e.target as Document).children[0] as HTMLHtmlElement;
 		const parts = nav
 			.slice(0, -1)
 			.map((i) => document.querySelector(`#${i.path}`) as HTMLElement | null);
@@ -80,7 +79,7 @@
 		visibleElement = highlightedPart!.id;
 		if (highlightedPart!.id !== lastHighlightedPart) {
 			lastHighlightedPart = highlightedPart!.id;
-			window.history.replaceState({}, '', `#${highlightedPart?.id}`);
+			replaceState(`#${highlightedPart?.id}`, {});
 		}
 	};
 </script>

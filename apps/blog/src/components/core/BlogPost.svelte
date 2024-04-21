@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Post } from 'src/contents/posts/types';
-	import SkillButton from '../buttons/SkillButton.svelte';
 	import { goto } from '$app/navigation';
+	import { SkillButton } from '@simproch-dev/ui';
 
 	export let post: Post;
 	const { id, title, tags, subtitle, date } = post;
