@@ -37,6 +37,7 @@
     color: white;
     padding: 60px 60px 20px 60px;
     justify-content: center;
+    margin-top: auto;
   }
 
   .about {
