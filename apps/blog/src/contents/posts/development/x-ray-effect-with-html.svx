@@ -1,8 +1,6 @@
 <script>
     import Contents from './x-ray-effect-with-html';
-    import XRaySvg from 'src/components/examples/XRaySvg.svelte';
-    import XRayHtml from 'src/components/examples/XRayHtml.svelte';
-    import XRayHtmlDarkMode from 'src/components/examples/XRayHtmlDarkMode.svelte';
+    import { XRaySvg, XRayHtml, XRayHtmlDarkMode  } from '@simproch-dev/x-ray';
     export const contents = Contents
 </script>
 

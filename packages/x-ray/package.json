@@ -1,0 +1,20 @@
+{
+  "name": "@simproch-dev/x-ray",
+  "version": "0.0.0",
+  "type": "module",
+  "module": "index.ts",
+  "main": "index.ts",
+  "exports": {
+    ".": {
+      "types": "./index.ts",
+      "svelte": "./index.ts"
+    }
+  },
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@simproch-dev/config-eslint": "*",
+    "svelte": "^4.2.12"
+  }
+}

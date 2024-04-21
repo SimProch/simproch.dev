@@ -15,7 +15,8 @@
 		"test:unit": "vitest"
 	},
 	"dependencies": {
-		"@simproch-dev/ui": "*"
+		"@simproch-dev/ui": "*",
+		"@simproch-dev/x-ray": "*"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.42.1",
