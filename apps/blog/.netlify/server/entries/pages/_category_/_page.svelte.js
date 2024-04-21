@@ -11,7 +11,6 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   {
     {
       currentContent = Contents[$page.params.category];
-      console.log(currentContent);
     }
   }
   $$unsubscribe_page();

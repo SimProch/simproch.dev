@@ -1,4 +1,4 @@
-import { c as create_ssr_component, e as escape, b as add_attribute } from "./ssr.js";
+import { c as create_ssr_component, e as escape, d as add_attribute } from "./ssr.js";
 const Meta = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { title = "" } = $$props;
   let { keywords = "" } = $$props;

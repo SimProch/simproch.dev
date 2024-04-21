@@ -1,4 +1,4 @@
-import { c as create_ssr_component, v as validate_component, e as escape, f as each, b as add_attribute } from "../../chunks/ssr.js";
+import { c as create_ssr_component, v as validate_component, e as escape, f as each, d as add_attribute } from "../../chunks/ssr.js";
 import { T as TitleBlock, C as Contents, S as SkillButton, L as LinkButton } from "../../chunks/TitleBlock.js";
 import "../../chunks/client.js";
 /* empty css                                                */
