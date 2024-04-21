@@ -12,7 +12,7 @@ return {
 	assets: new Set([".DS_Store","favicon.ico","icons/linkedin-white.ico","icons/stack-overflow.ico","icons/twitter.ico","images/.DS_Store","images/company-logos/green-fox-academy.png","images/company-logos/level-works.png","images/company-logos/logex-solution-centre.png","images/logo.png","robots.txt","simproch.jpeg","sitemap.xml"]),
 	mimeTypes: {".png":"image/png",".txt":"text/plain",".jpeg":"image/jpeg",".xml":"text/xml"},
 	_: {
-		client: {"start":"_app/immutable/entry/start.BBadZI0H.js","app":"_app/immutable/entry/app.rI21423A.js","imports":["_app/immutable/entry/start.BBadZI0H.js","_app/immutable/chunks/entry.18nxjYF1.js","_app/immutable/chunks/scheduler.CC5rdfI7.js","_app/immutable/entry/app.rI21423A.js","_app/immutable/chunks/scheduler.CC5rdfI7.js","_app/immutable/chunks/index.BPwNn6vj.js"],"stylesheets":[],"fonts":[],"uses_env_dynamic_public":false},
+		client: {"start":"_app/immutable/entry/start.7sXNs0DE.js","app":"_app/immutable/entry/app.pDcnPUXN.js","imports":["_app/immutable/entry/start.7sXNs0DE.js","_app/immutable/chunks/entry.CdEJCCdd.js","_app/immutable/chunks/scheduler.CC5rdfI7.js","_app/immutable/entry/app.pDcnPUXN.js","_app/immutable/chunks/scheduler.CC5rdfI7.js","_app/immutable/chunks/index.BPwNn6vj.js"],"stylesheets":[],"fonts":[],"uses_env_dynamic_public":false},
 		nodes: [
 			__memo(() => import('../server/nodes/0.js')),
 			__memo(() => import('../server/nodes/1.js')),
