@@ -4,7 +4,19 @@
 	import { SkillButton } from '@simproch-dev/ui';
 
 	export let post: Post;
-	const { id, title, tags, subtitle, date } = post;
+	let id: string;
+	let title: string;
+	let tags: string[];
+	let subtitle: string;
+	let date: string;
+
+	$: {
+		id = post.id;
+		title = post.title;
+		tags = post.tags;
+		subtitle = post.subtitle;
+		date = post.date;
+	}
 
 	const onPostClick = (event: PointerEvent | KeyboardEvent | any) => {
 		event?.preventDefault();

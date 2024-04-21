@@ -4,6 +4,7 @@
 	import BlogPost from './BlogPost.svelte';
 	import { getSortedPosts } from '../getSortedPosts';
 	import { page } from '$app/stores';
+	import PaginatedPosts from './PaginatedPosts.svelte';
 
 	export let category: Category;
 	let posts: Post[] = [];
@@ -18,9 +19,7 @@
 {#if posts.length === 0}
 	<img src="/images/empty.png" alt="Empty posts" class="empty-image" />
 {:else}
-	{#each posts as post (post.id)}
-		<BlogPost {post} />
-	{/each}
+	<PaginatedPosts {posts} />
 {/if}
 
 <style lang="scss">
