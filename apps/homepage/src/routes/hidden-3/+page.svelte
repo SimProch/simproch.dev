@@ -14,12 +14,16 @@
 		inputValues[input] = e.value;
 	};
 	const submit = () => {
+		const temp = [...answers];
 		inputs.forEach((item, index) => {
-			if (inputValues[item] !== answers[index]) {
-				inputErrors[item] = true;
+			const val = inputValues[item];
+			const answerIndex = temp.indexOf(val);
+			if (answerIndex > -1) {
+				temp.splice(answerIndex, 1);
+				inputErrors[item] = false;
 				return;
 			}
-			inputErrors[item] = false;
+			inputErrors[item] = true;
 		});
 
 		if (Object.values(inputErrors).every((i) => !i)) {

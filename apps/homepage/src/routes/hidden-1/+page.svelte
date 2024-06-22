@@ -47,7 +47,7 @@
 	<div class="form">
 		{#each inputs as input}
 			<div class="input">
-				<label for={input}>{input.toUpperCase()}</label>
+				<!-- <label for={input}>{input.toUpperCase()}</label> -->
 				<input
 					type="text"
 					name={input}
