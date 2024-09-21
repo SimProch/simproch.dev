@@ -9,8 +9,13 @@
 <div class="page">
 	<div style="font-size: 1rem; font-weight: 600">Hledání pokladu</div>
 
-	<img src="/images/treti.png" alt="First location" class="header-bar__logo-wrapper__logo" />
-	<p>Pro dokončení bojovky nalezněte poklad umístěný na třetím stanovišti (viz QR kód) a využijte jeho potenciál.</p>
+	<a href="https://en.mapy.cz/s/rebomasola">
+		<img src="/images/treti.png" alt="First location" class="header-bar__logo-wrapper__logo" />
+	</a>
+	<p>
+		Pro dokončení bojovky nalezněte poklad umístěný na třetím stanovišti (viz QR kód) a využijte
+		jeho potenciál.
+	</p>
 
 	<div class="button-row">
 		<button on:click={submit}>Máme hotovo</button>

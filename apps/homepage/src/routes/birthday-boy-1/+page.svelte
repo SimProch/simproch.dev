@@ -5,7 +5,7 @@
 		'Datum narození (DD.MM.YYYY)',
 		'Jméno za svobodna',
 		'Počet dětí',
-		'Počet vyhraných zápasů',
+		'Počet vyhraných zápasů'
 	];
 
 	const submit = () => {
@@ -16,7 +16,9 @@
 <div class="page">
 	<div style="font-size: 1rem; font-weight: 600">Co víte o oslavenci?</div>
 
-	<img src="/images/prvni.png" alt="First location" class="header-bar__logo-wrapper__logo" />
+	<a href="https://en.mapy.cz/s/kezorasoru">
+		<img src="/images/prvni.png" alt="First location" class="header-bar__logo-wrapper__logo" />
+	</a>
 
 	<p>Doražte na první stanoviště (QR kód) a zodpovězte následující otázky</p>
 

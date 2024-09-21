@@ -11,7 +11,9 @@
 <div class="page">
 	<div style="font-size: 1rem; font-weight: 600">Fyzická zdatnost</div>
 
-	<img src="/images/druhy.png" alt="First location" class="header-bar__logo-wrapper__logo" />
+	<a href="https://en.mapy.cz/s/cenuruhevo">
+		<img src="/images/druhy.png" alt="First location" class="header-bar__logo-wrapper__logo" />
+	</a>
 
 	<p>Doražte na druhé stanoviště (QR kód) a provedťe následující úkony</p>
 
