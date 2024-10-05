@@ -7,7 +7,7 @@
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
-		"test": "npm run test:integration && npm run test:unit",
+		"test": "playwright test",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "eslint .",
@@ -17,6 +17,7 @@
 		"@simproch-dev/ui": "*"
 	},
 	"devDependencies": {
+		"@playwright/test": "^1.47.2",
 		"@simproch-dev/config-eslint": "*",
 		"@sveltejs/adapter-netlify": "4.2.0",
 		"@sveltejs/kit": "^2.5.2",
