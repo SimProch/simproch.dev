@@ -13,7 +13,7 @@
 	};
 </script>
 
-<div class="root">
+<div class="root" on:scroll={mouseMove}>
 	<Header />
 	<slot />
 	<Footer />
@@ -22,7 +22,13 @@
 	<img src="/images/angry-simon.gif" alt="SimProch logo" />
 </div>
 
-<svelte:body on:mousemove={mouseMove} on:touchstart={mouseMove} />
+<svelte:body
+	on:mousemove={mouseMove}
+	on:wheel={mouseMove}
+	on:mousedown={mouseMove}
+	on:touchstart={mouseMove}
+	on:keydown={mouseMove}
+/>
 
 <style lang="scss">
 	@import '../variables.scss';
