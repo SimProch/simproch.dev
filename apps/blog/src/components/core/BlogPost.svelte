@@ -28,7 +28,8 @@
 <style lang="scss">
 	@import '../../variables.scss';
 	.wrapper {
-		margin-top: 24px;
+		margin-top: 48px;
+		margin-bottom: 48px;
 		display: flex;
 		flex-direction: column;
 	}
