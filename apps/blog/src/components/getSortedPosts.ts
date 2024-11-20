@@ -1,4 +1,4 @@
-import type { Post } from 'src/contents/posts/types';
+import type { Post } from 'src/posts/_types';
 
 const getDateObjFromString = (date: string) => {
 	const arr = date

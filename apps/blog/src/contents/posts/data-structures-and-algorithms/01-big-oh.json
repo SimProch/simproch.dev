@@ -1,9 +1,0 @@
-{
-	"id": "01-big-oh",
-	"date": "25. 11. 2023",
-	"title": "The Big Oh Notation",
-	"subtitle": "How to measure algorithm speed",
-	"tags": ["data", "structures", "algorithms"],
-	"description": "Big Oh Notation and measuring speed.",
-	"breadcrumbs": "Data Structures & Algorithms"
-}

@@ -1,9 +1,0 @@
-{
-	"id": "5-system-design-consistent-hashing",
-	"date": "12. 11. 2023",
-	"title": "System Design 5 - Consistent Hashing",
-	"subtitle": "To achieve consistent hashing across servers",
-	"tags": ["system-design", "system", "design"],
-	"description": "Fifth part deals with consistent hashing across multiple servers.",
-	"breadcrumbs": "System Design"
-}

@@ -1,8 +1,7 @@
 <script>
-	import { Contents } from 'src/contents/contents';
+	import BlogPost from 'src/components/core/BlogPost.svelte';
 	import Body from 'src/components/core/Body.svelte';
-	import LatestPosts from 'src/components/core/LatestPosts.svelte';
-	const data = Contents.home;
+	import { posts } from 'src/posts/_posts';
 </script>
 
 <svelte:head>
@@ -10,5 +9,7 @@
 </svelte:head>
 
 <Body>
-	<LatestPosts category={data} />
+	{#each posts as post}
+		<BlogPost {post} />
+	{/each}
 </Body>
