@@ -17,18 +17,10 @@
 		subtitle = post.subtitle;
 		date = post.date;
 	}
-
-	const onPostClick = (event: PointerEvent | KeyboardEvent | any) => {
-		event?.preventDefault();
-		if (event instanceof KeyboardEvent && event.key !== 'Enter') {
-			return;
-		}
-		goto(`/posts/${id}`);
-	};
 </script>
 
 <div class="wrapper">
-	<a href={`/posts/${id}`} on:click={onPostClick}>
+	<a href={`/posts/${id}`}>
 		<time>{date}</time>
 		<h1>{title}</h1>
 		{#if subtitle}
