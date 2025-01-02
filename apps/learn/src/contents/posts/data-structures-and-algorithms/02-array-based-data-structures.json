@@ -1,0 +1,9 @@
+{
+	"id": "02-array-based-data-structures",
+	"date": "26. 11. 2023",
+	"title": "Array Based Data Structures",
+	"subtitle": "Queues, Stacks, Sets and more",
+	"tags": ["array", "data", "structures", "queue", "set", "stack"],
+	"description": "Array Based Data Structures, such as queues, stacks and sets.",
+	"breadcrumbs": "Data Structures & Algorithms"
+}

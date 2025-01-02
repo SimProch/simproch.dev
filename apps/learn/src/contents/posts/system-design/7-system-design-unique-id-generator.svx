@@ -1,0 +1,185 @@
+<script>
+    import Contents from './7-system-design-unique-id-generator.json';
+    export const contents = Contents
+</script>
+
+# {Contents.title}
+
+{contents.subtitle}
+
+## [Introduction](#intro)<span id="intro" />
+
+So far we've discussed the issues when working with distributed environments. When we dealt with consistent hashing, we had to deal with 
+hashing that's used in multiple servers. Well, the same thing goes for databases. And this chapter is dedicated to that.
+
+Often times, when working with IDs, you'd typically use either numeric identifiers with `@autoIncrement` on the DB table, or generate a [UUID](https://datatracker.ietf.org/doc/html/rfc4122).
+
+Well, did you ever think about why UUIDs are so generally used? Sure, they are unique - or at least should be. As per [wikipedia](https://en.wikipedia.org/wiki/Universally_unique_identifier#Collisions):
+
+> For example, the number of random version-4 UUIDs which need to be generated in order to have a 50% probability of at least one collision is 2.71 quintillion (2.71 * 10^18)
+
+So, that's a rather large number.
+
+Before going to the details why we may need to have something else, let's first go through a couple of ID generators
+
+### [Auto-Increment](#auto-increment)<span id="auto-increment" />
+
+So, the first that comes to mind when we want unique ID on databse is autoincrement. Surely this will work, right?
+
+An in fact, yes, it will, as long as you know what you're going for.
+
+Consider that you're building a software that is to be used only in Czechia. Czechia is pretty small and you really need a server only in Prague.
+
+Pros:
+- Easy to set up (a flag on database table)
+
+Cons:
+- Impossible to scale
+- If you ever go to multiple regions, you'd have to migrate your data
+
+Well, that is easy. But we've been talking about adding and removing servers on the go. What would happen here? Well, collisions. Basically, 
+multiple databases having same IDs for different records, making it impossible to get some business insight from your data.
+
+### [Distributed Auto-Increment](#distributed-auto-increment)<span id="distributed-auto-increment" />
+
+So, let's try to scale it up. We've talked about this in consistent hashing already. This is also sometimes called [Multi-master replication](https://en.wikipedia.org/wiki/Multi-master_replication).
+
+What we're gonna do is we're gonna autoIncrement, but we'll do it with a specific value. Consider the following:
+- If we have 2 servers, both increment by 2 and start on different values
+  - `server0` will have `1, 3, 5, 7, ...`
+  - `server1` will have `2, 4, 6, 8, ...`
+
+Now, if we had  3 servers, we would just increment by 3. In practice, we'd always increment by number of servers.
+
+This sounds nice, but it has quite a massive disadvantage. Imagine that you have a traffic burst and you want to add more servers. Where do you go from there?
+
+Well, you could raise more servers and change the increment. But if you originally had 2, and now you have 3 servers, without data migrations, you'd end up with:
+  - `server0`: `1, 3, 5, 7, 10`
+  - `server1`: `2, 4, 6, 8, 11`
+  - `server3`: `3`
+
+Now, you see the issue. We've already had 3 before. It's inconsistent. And you'd have to do quite some work around it. Let's make it better with UUIDs
+
+### [UUID](#uuid)<span id="uuid" />
+
+So, we'll be working with something unique now! UUIDs are quite well described. Basically, they are 32 hexadecimal characters.
+- Hexadecimal character is a number going from 0-f (where a-f being 10-15)
+- A hexadecimal character takes 4 bits. So, if we wanted to write `f`, we would do `1111`
+- Therefore, 32 * 4 is 128 bits
+
+I've mentioned that on purpose. 128 bits is a BIG number. I had to look up that number and it's 340 undecillion combinations.
+
+Basically, you are way more likely to win the lottery multiple times in a row than generating a duplicate UUID.
+
+But, we wouldn't be here if it were without disadvantage, would we?
+
+Well, as it turns out, you can't sort by them, because they are quite random. Imagine you wanted to get the first 10 UUIDs you've ever generated. From UUID, it's impossible!
+
+Furthermore, as I mentioned, 128 bits is a BIG number. It's also 16 bytes. Let's do some math:
+- 16 bytes per UUID
+- Imagine the tool you're building is used a lot (e.g. tinyURL)
+- Imagine you have 10000 UUIDs generated per second
+- Thats 860 400 000 UUIDs per day.
+- That's (16 * 860 400 000) bytes per day in your DB.
+- That's 13800 MB per day (or 13.8 GB).
+- That's around 5 TB per year.
+- That's a lot of storage
+
+Now, if you came up with a way to make it 64 bits, you'd effectively halve the storage required! So, chances are, you may want to have less than that!
+
+### [Ticket Server](#ticket-server)<span id="ticket-server" />
+
+While ticket server doesn't solve the UUID issue, it's an interesting way to generate numeric IDs. 
+[Flickr](https://code.flickr.net/2010/02/08/ticket-servers-distributed-unique-primary-keys-on-the-cheap/) actually created one for themselves.
+
+So, how do they work? Well, it's basically centralized autoincrement for servers.
+- Your web servers are connecting via API to a centralized store generating IDs
+- The servers then save autoincremented IDs from the single source
+
+This is another one that's easy to implement, but has drawbacks:
+- If ticket server fails, your app completely stops working
+- It's centralized. The further it is from your servers, the slower it gets
+- By decentralizing it, you're going back to the issue you're trying to solve (data sync)
+
+## [What are we building](#what-we-build)<span id="what-we-build" />
+
+So, we've shown a couple of options.
+- Single Server Autoincrement is easiest but with issues
+- Multi-Master Replication and Ticket Master is better, but still not it
+- UUIDs seem to be best, but can get costly and have their own drawbacks
+
+So, let's first create the issue why UUIDs can't be used! Let's say you're on an interview, and you're given the following task:
+- IDs must be unique
+- IDs are numerical only
+- IDs fit into 64 bits
+- IDs are ordered by date
+- You can generate 10k IDs per second
+
+So, this is actually a thing that UUIDs completely fail to oblige! The only thing they are is they are unique! (And also numerical, kinda, you can transform 128 bits to a number)
+
+And why would we have these requirements? Well, let's say it's because you're on an interview! Or also because we want to save some data with the 64 bits.
+
+What would we do then? Well, it turns out we can fairly easily create our own ID!
+
+## [Twitter](#twitter)<span id="twitter" />
+
+In this part, I'm gonna create my own ID! Well, not necessarily, I'm gonna follow what [Twitter did](https://blog.twitter.com/engineering/en_us/a/2010/announcing-snowflake)
+
+So, let's start with unique IDs. How would we generate one that's unique? Well, turns out, it's fairly simple. We can just increment it. 
+But hold on, Simon. You've said we can't increment it!
+
+No! What I said was we can't autoincrement on database. But what if we incremented manually, and only some parts? Well, let's take a look at it!
+
+We're gonna do the same thing that's done to [IP Packets](https://en.wikipedia.org/wiki/Internet_Protocol_version_4#Packet_structure). We will separate a sequence into a section.
+
+We have 64 bits available. That means 64 ones and zeroes. And we know how binary works. So, what we're gonna do is we will:
+- Separate the 64 bits into multiple sections
+- We'll have 5 bits (which is 32) reserved for data centres
+- We'll have 5 bits (which is 32) reserved for machines
+  - This gives us 32 datacentres of 32 computers. That's a lot of computational power
+  - We can have around 5 datacentres in each continent, each containing 32 servers.
+- We're left off with 54 bits. Now, we want to store our data on these machines. How many IDs could be on each of them?
+  - Let's start with 12 bits per machine. 
+  - That's 4096 ids per machine.
+- Now, we're left with 42 bits.
+  - We've already set up distributed system by the original 10 bits
+  - We already have space for 4096 ids on a single machine
+  - We have already achieved the numerical constraint by using binary
+
+So, how can we use the 42 bits to allow sorting by date, and allow for way more IDs? Well...
+
+We can use them to store the number of milliseconds from an arbitrary epoch.
+- A lot of languages allow for dates to be converted to milliseconds from 1.1.1970. Or the [Unix Epoch](https://en.wikipedia.org/wiki/Unix_time)
+- We could use those 42 bits to calculate the number of miliseconds from the Epoch, or from one of our own definition
+- 42 bits are enough to last for 139 years
+- If we'd store the number of milliseconds passed since 1970, this would work until 2109
+- We could store the number of milliseconds from writing this post (14.11.2023). That would last until 2162.
+
+Now, if we go back up - we've had 4096 ids on a single machine. With this addition, it makes it 4096 ids on a single machine per millisecond.
+
+So, theoretically, our hard limits here are:
+- Company lasting fro 139 years
+- Generating more than 4096 IDs in a millisecond
+  - Since this is unlikely, the sequence number will most likely be always `0`.
+
+And the best thing is, we can also sort by date! Because the first 42 bits define the number of milliseconds from the Epoch, we can sort by these! And with some basic math, we can also get periods and more!
+
+## [Summary](#summary)<span id="summary" />
+
+So, in this part, we've gone through 4 different options of generating IDs
+- Autoincrement (centralized & decentralized)
+- Centralized ID distributor
+- UUIDs
+- Twitter Snowflake (building our own ID)
+
+We're gonna use these in an interesting way in the next part where we build our own URL shortener
+
+# [References](#references)<span id="references" />
+- [System Design Interview book](https://www.amazon.com/System-Design-Interview-insiders-Second/dp/B08CMF2CQF)
+- [UUID RFC](https://datatracker.ietf.org/doc/html/rfc4122)
+- [UUID Collisions](https://en.wikipedia.org/wiki/Universally_unique_identifier#Collisions)
+- [Multi-master replication](https://en.wikipedia.org/wiki/Multi-master_replication)
+- [Ticket Server](https://code.flickr.net/2010/02/08/ticket-servers-distributed-unique-primary-keys-on-the-cheap/)
+- [Twitter Snowflake algorithm](https://blog.twitter.com/engineering/en_us/a/2010/announcing-snowflake)
+- [Unix Epoch](https://en.wikipedia.org/wiki/Unix_time)
+- [IP Packets](https://en.wikipedia.org/wiki/Internet_Protocol_version_4#Packet_structure)

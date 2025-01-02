@@ -1,0 +1,139 @@
+<script>
+    import Contents from './11-system-design-news-feed.json';
+    export const contents = Contents
+</script>
+
+# {Contents.title}
+
+{contents.subtitle}
+
+## [Introduction](#intro)<span id="intro" />
+
+Congratulations on making it this far! This time, we'll go back in time a little.
+
+In the [third](/posts/3-system-design-estimations#high-level-design) section, we've already talked about a basic news feed.
+
+Let's try to revisit that this time once again with what we've learned!
+
+## [Scope](#scope)<span id="scope" />
+
+A news feed publishing, similar to facebook timeline page.
+
+- Mobile & Web app
+- 10 millions daily active users
+- Can contain text, images and videos simultaneously
+- The important feature is that user can make a post and see posts of their friends
+- A user can have 5000 friends
+- Posts are visible in reverse chronological order
+- App is available worldwide
+
+## [High Level Design](#high-level-design)<span id="high-level-design" />
+
+So, again, let's start with a high level design! We'll have a bunch of services here!
+
+It makes sense to start with __publishing service__ since there would be no posts to retrieve without one! 
+An HTTP call to this service could be something like `POST api/feed/create`. This would require authentication 
+and content.
+
+Then, a __news feed service__ which retrieves the posts. This could look like `GET api/feed/me` to receive 
+data curated for the user who requests it. Again, auth token is required.
+
+Now, since the two services are separate, how will the __news feed service__ know about new posts? Well, the 
+__publishing__ service needs to handle that as well. Once a post is created, it's saved into a database/cache of 
+__news feed service__. 
+
+Now, that looks a little weird, right? The two services communicating weirdly. One for retrieving posts, while another one for saving them?
+
+So, let's redefine them!
+- Post service, which contains all posts that have been posted, and has a cache and DB of posts
+- News feed service, which is responsible for creating and retrieving them
+
+Now, when a new post is created, it gets created in news feed service and saved in post DB.
+
+Finally, we've discussed notifications last time. Let's add a notification service in here as we know how to do it! 
+Users can now be notified of new content!
+
+Now, as usual, this looks like a distributed system. So, we'll need:
+- Load balancers for multiple servers
+- Rate limiting to not be overwhelmed
+- Authentication as we've mentioned we are using it
+- Monitoring and analytics
+
+Finally, we also want to store the information somewhere. That'd again be database and cache for fast retrieval. 
+Note that the list is in reverse chronological order, so we could cache the latest published posts.
+
+## [Deep dive into design](#deep-dive)<span id="deep-dive" />
+
+So, let's identify the problematic parts.
+- Post service is just for storing the posts
+- Notification service is just for pushing notifications
+- The most work here is done by the news feed itself. Why?
+  - Creates the posts and saves them to __post service__
+  - Furthermore, it creates the feed for friends list
+  - And because it creates the feed for all friends, it also pushes the post to __notification service__
+
+So, the first 2 don't need much more attention, but we can get better in the __news feed service__. Let's try to improve
+
+When a post is created, it is saved into __post service__. However, we also want to build the news feed for friends.
+
+A social network is basically a graph, where nodes are users and edges are their relationships. There's also a 
+[Graph DB](https://en.wikipedia.org/wiki/Graph_database) that's good for these use cases. So, for getting the 
+relations, we'll use GDB.
+
+After we've fetched all the users to which we want to save the newly published post, we need to get their data. 
+This will most likely be a user DB.
+
+Finally, we will be pushing the latest posts into the cache. Now, pushing 1 post into 5000 friends can be slow. 
+It gets even slower when we have a lot of users. Therefore, for publishing, we'll use a message queue and multiple 
+workers to handle that.
+
+Lastly, this entire process is called [Fanout](https://en.wikipedia.org/wiki/Fan-out_(software)). We're basically 
+delivering a message to all friends.
+
+Now, there's a potential problem in here. Imagine the following scenario:
+- A user has 5000 friends
+- 80 % of these users are inactive
+- We're effectivelly pushing every post to users that won't read it.
+
+So, we have essentially 2 options:
+
+__Fanout on write__ is where the above problem happens. The news feed is in real time and fetching it is fast 
+because it is precomputed. However, if there are many friends, the generation can be slow, especially if there 
+are inactive users.
+
+__Fanout on read__ is the opposite. The fanout basically happens when the data is read, meaning that it is 
+on demand. For inactive users, resources are not wasted. However, fetching the news feed may be slow as it's not 
+precomputed.
+
+Again, it depends on the use case. We could even adopt a hybrid approach:
+- Users that have many followers will have content on demand
+- Users with less followers will have real-time content
+
+### [Caching](#caching)<span id="caching" />
+
+Now, one of the most important part here is caching. There can be a lot of posts, historical or new, and a lot of friends.
+
+We can have cache for the following:
+- News feed - a cache of IDs `userId, postId`
+- Content - Stores all post data. Popular content is stored in separate [hot cache](https://stackoverflow.com/questions/22756092/what-does-it-mean-by-cold-cache-and-warm-cache-concept)
+- Social Graph - Stores relations between users (follower/following)
+- Actions - Stores info about interactions (likes, replies, shares, ...)
+- Counters - Like counter for example. We don't need to show all likes immediately, only counters.
+
+Our final system could look like:
+
+<img src="/images/system-design/deep-dive-post-publishing.webp" alt="Deep Dive Post Publishing" title="Deep Dive Post Publishing" class="image" loading="lazy" />
+
+## [Summary](#summary)<span id="summary" />
+
+In this part, we've revisited a previous friend - news feed service.
+
+We've again taken a look at the original design, but described the concepts a little more and enhanced it.
+
+Hopefully this trip down the memory lane was useful for you - it certainly was for me!
+
+# [References](#references)<span id="references" />
+- [System Design Interview book](https://www.amazon.com/System-Design-Interview-insiders-Second/dp/B08CMF2CQF)
+- [Graph DB](https://en.wikipedia.org/wiki/Graph_database)
+- [Fanout](https://en.wikipedia.org/wiki/Fan-out_(software))
+- [Hot vs Cold cache](https://stackoverflow.com/questions/22756092/what-does-it-mean-by-cold-cache-and-warm-cache-concept)

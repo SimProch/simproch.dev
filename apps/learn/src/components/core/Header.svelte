@@ -1,113 +1,76 @@
 <script lang="ts">
-	import { goto, replaceState } from '$app/navigation';
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { DynamicIcon } from '@simproch-dev/ui';
-	const nav: Array<{ path: string; name: string; isExternal?: true }> = [
-		{ path: 'home', name: 'Home' },
-		{ path: 'about', name: 'About' },
-		{ path: 'experience', name: 'Experience' },
-		{ path: 'https://blog.simproch.dev/', name: 'Blog', isExternal: true },
-		{ path: 'https://learn-with.simproch.dev/', name: 'Learn', isExternal: true }
-	];
+	import type { CategoryId } from 'src/contents/base';
+	import { nav } from 'src/contents/contents';
 
+	let active = $page.params.category as CategoryId;
 	let isMenuVisible = false;
-	let visibleElement = 'home';
-	let header: HTMLElement;
-	let lastHighlightedPart: string = 'home';
+	let logo = '/images/logo.png';
 
-	const toggleMenu = (event: MouseEvent | KeyboardEvent) => {
+	const toggleMenu = (event: PointerEvent | KeyboardEvent | any) => {
 		event.preventDefault();
-		if (event instanceof KeyboardEvent) {
-			if (event.key === 'Enter') {
-				isMenuVisible = !isMenuVisible;
-			}
+		if (event instanceof KeyboardEvent && event.key !== 'Enter') {
 			return false;
 		}
 		isMenuVisible = !isMenuVisible;
 		return false;
 	};
 
-	const getHref = (id: string) => {
-		if (id === 'home') return './';
-		if (id.startsWith('https')) return id;
-		return `./#${id}`;
-	};
-
-	const scrollTo = (event: MouseEvent | KeyboardEvent, id: string) => {
+	const onNavigate = (event: PointerEvent | KeyboardEvent | any, id: string) => {
 		event.preventDefault();
-		if (id.startsWith('http')) {
-			window.open(id, '_blank');
-			return false;
-		}
-		const selector = `#${id}`;
-		const item = document.querySelector(selector) as HTMLElement | null;
-
-		if (event instanceof KeyboardEvent && event.key === 'Enter') {
-			return false;
-		}
-
-		isMenuVisible = !isMenuVisible;
-		if (!item) {
-			goto(`${$page.url.origin}/${selector}`);
-			return false;
-		}
-
-		let top = item.getBoundingClientRect().top + window.scrollY;
-		if (window.innerWidth > 780) {
-			top -= header.offsetHeight;
-		}
-
-		window.scrollTo({
-			top,
-			behavior: 'smooth'
-		});
-		replaceState(selector, {});
-		return false;
-	};
-
-	const onScroll = (e: Event) => {
-		const parts = nav
-			.slice(0, -1)
-			.map((i) => document.querySelector(`#${i.path}`) as HTMLElement | null);
-		if (parts.includes(null)) {
-			visibleElement = nav[2].path;
+		const where = `/${id}`;
+		if (event instanceof KeyboardEvent && event.key !== 'Enter') {
 			return;
 		}
-		let highlightedPart = parts
-			.reverse()
-			.find((i) => i!.getBoundingClientRect().top + window.scrollY <= header.offsetTop);
-		if (highlightedPart == null) highlightedPart = parts[parts.length - 1];
-		visibleElement = highlightedPart!.id;
-		if (highlightedPart!.id !== lastHighlightedPart) {
-			lastHighlightedPart = highlightedPart!.id;
-			replaceState(`#${highlightedPart?.id}`, {});
-		}
+		isMenuVisible = !isMenuVisible;
+		goto(where);
+
+		return false;
 	};
+
+	const onLogoClick = (event: PointerEvent | KeyboardEvent | any) => {
+		event.preventDefault();
+		if (event instanceof KeyboardEvent && event.key !== 'Enter') {
+			return;
+		}
+
+		if ($page.route.id !== '/') {
+			goto('/');
+			return;
+		}
+
+		logo = logo === '/images/logo.png' ? '/images/angry-simon.gif' : '/images/logo.png';
+		return;
+	};
+
+	$: {
+		active = $page.params.category as CategoryId;
+	}
 </script>
 
-<header class="flex-col" bind:this={header}>
+<header>
 	<div class="header-bar">
 		<div class="header-bar__logo-wrapper">
-			<a href="/">
-				<img src="/images/logo.png" alt="SimProch logo" class="header-bar__logo-wrapper__logo" />
+			<a href="/" on:click={onLogoClick} on:keyup={onLogoClick}>
+				<img src={logo} class="header-bar__logo-wrapper__logo" alt="SimProch logo" />
 			</a>
+			<a href="/" class="header-bar__logo-wrapper__blog"> Learn </a>
 		</div>
-
 		<nav class="header-bar__navigation">
 			<div class="header-bar__navigation__routes header-bar__navigation__routes--desktop">
-				{#each nav as route}
+				{#each nav as route (route.path)}
 					<a
-						href={getHref(route.path)}
+						href={`/${route.path}`}
 						class="header-bar__navigation__routes__route"
+						class:header-bar__navigation__routes__route--active={active == route.path}
 						tabindex="0"
-						class:header-bar__navigation__routes__route--active={route.path === visibleElement}
-						on:click={(e) => scrollTo(e, route.path)}
+						on:keyup={(e) => onNavigate(e, route.path)}
+						on:click={(e) => onNavigate(e, route.path)}
 					>
 						<span>
 							{route.name}
-							{#if route.isExternal}
-								<DynamicIcon name="icon-external-window" type="mini" />
-							{/if}
 						</span>
 					</a>
 				{/each}
@@ -118,7 +81,7 @@
 					role="link"
 					tabindex="0"
 					on:keyup={toggleMenu}
-					on:click={(e) => toggleMenu(e)}
+					on:click={toggleMenu}
 					class:header-bar__navigation__routes__hamburger--visible={!isMenuVisible}
 				>
 					<DynamicIcon name="icon-menu" />
@@ -138,21 +101,18 @@
 					class:header-bar__navigation__routes__list--visible={isMenuVisible}
 				>
 					<ul>
-						{#each nav as route}
+						{#each nav as route (route.path)}
 							<li>
 								<a
-									href={getHref(route.path)}
-									class="header-bar__navigation__routes__route"
+									href={`./${route.path}`}
 									tabindex="0"
-									class:header-bar__navigation__routes__route--active={route.path ===
-										visibleElement}
-									on:click={(e) => scrollTo(e, route.path)}
+									class="header-bar__navigation__routes__route"
+									class:header-bar__navigation__routes__route--active={active == route.path}
+									on:keyup={(e) => onNavigate(e, route.path)}
+									on:click={(e) => onNavigate(e, route.path)}
 								>
 									<span>
 										{route.name}
-										{#if route.isExternal}
-											<DynamicIcon name="icon-external-window" type="mini" />
-										{/if}
 									</span>
 								</a>
 							</li>
@@ -164,20 +124,26 @@
 	</div>
 </header>
 
-<svelte:window on:scroll={onScroll} />
-
 <style lang="scss">
 	@import '../../variables.scss';
 
 	header {
+		height: 5rem;
 		position: sticky;
 		top: 0;
 		background-color: white;
-		border-bottom: 1px solid rgb(240, 240, 240);
+		border-bottom: 1px solid $background-color-secondary;
 		z-index: 1;
-		height: 5rem;
-		justify-content: center;
 		padding: 0 32px 0 24px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		font-family: $font-family;
+
+		ul {
+			list-style-type: none;
+			margin-left: 0;
+		}
 
 		@media (max-width: 780px) {
 			position: relative;
@@ -191,9 +157,25 @@
 		align-items: center;
 
 		.header-bar__logo-wrapper {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
 			.header-bar__logo-wrapper__logo {
 				width: 50px;
 				height: 50px;
+			}
+
+			.header-bar__logo-wrapper__blog {
+				display: block;
+				margin-left: 2rem;
+				text-decoration: none;
+				color: $menu-color;
+				opacity: $menu-opacity;
+				font-weight: $menu-font-weight;
+				font-size: $menu-font-size;
+				display: flex;
+				flex-direction: row;
+				cursor: pointer;
 			}
 		}
 
