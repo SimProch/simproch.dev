@@ -38,20 +38,16 @@
 		margin-right: 15vw;
 
 		@media (max-width: 780px) {
-			margin-left:5vw;
-			margin-right:5vw;
+			margin-left: 5vw;
+			margin-right: 5vw;
 		}
 
 		ul {
 			list-style-type: none;
-			width: 50%;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-
-			@media (max-width: 780px) {
-				width: 100%;
-			}
+			margin:0;
 
 			li {
 				width: 100%;
