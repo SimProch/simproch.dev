@@ -38,6 +38,9 @@
 			flex-direction: row;
 			list-style-type: none;
 
+			@media (max-width: 780px) {
+				flex-direction: column;
+			}
 			.card {
 				border: 1px solid #ccc;
 				border-radius: 8px;

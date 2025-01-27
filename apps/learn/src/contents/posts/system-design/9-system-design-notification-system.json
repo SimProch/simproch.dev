@@ -1,9 +1,7 @@
 {
 	"id": "9-system-design-notification-system",
-	"date": "19. 11. 2023",
-	"title": "System Design 9 - Notification System",
+	"order": 9,
+	"title": "Notification System",
 	"subtitle": "Sending notifications to users",
-	"tags": ["system-design", "system", "design"],
-	"description": "Ninth part talks about sending notifications to users through APN, FCM, SMS & email.",
-	"breadcrumbs": "System Design"
+	"description": "Ninth part talks about sending notifications to users through APN, FCM, SMS & email."
 }

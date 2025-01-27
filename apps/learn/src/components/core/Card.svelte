@@ -1,3 +1,4 @@
+<!-- TODO: Move `Cards` here -->
 <section>
 	<div class="cards">
         <div class="card"></div>

@@ -1,34 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { DynamicIcon } from '@simproch-dev/ui';
-	import type { CategoryId } from 'src/contents/base';
-	import { nav } from 'src/contents/contents';
-
-	let active = $page.params.category as CategoryId;
-	let isMenuVisible = false;
 	let logo = '/images/logo.png';
-
-	const toggleMenu = (event: PointerEvent | KeyboardEvent | any) => {
-		event.preventDefault();
-		if (event instanceof KeyboardEvent && event.key !== 'Enter') {
-			return false;
-		}
-		isMenuVisible = !isMenuVisible;
-		return false;
-	};
-
-	const onNavigate = (event: PointerEvent | KeyboardEvent | any, id: string) => {
-		event.preventDefault();
-		const where = `/${id}`;
-		if (event instanceof KeyboardEvent && event.key !== 'Enter') {
-			return;
-		}
-		isMenuVisible = !isMenuVisible;
-		goto(where);
-
-		return false;
-	};
 
 	const onLogoClick = (event: PointerEvent | KeyboardEvent | any) => {
 		event.preventDefault();
@@ -44,10 +17,6 @@
 		logo = logo === '/images/logo.png' ? '/images/angry-simon.gif' : '/images/logo.png';
 		return;
 	};
-
-	$: {
-		active = $page.params.category as CategoryId;
-	}
 </script>
 
 <header>
@@ -58,69 +27,6 @@
 			</a>
 			<a href="/" class="header-bar__logo-wrapper__blog"> Learn </a>
 		</div>
-		<nav class="header-bar__navigation">
-			<div class="header-bar__navigation__routes header-bar__navigation__routes--desktop">
-				{#each nav as route (route.path)}
-					<a
-						href={`/${route.path}`}
-						class="header-bar__navigation__routes__route"
-						class:header-bar__navigation__routes__route--active={active == route.path}
-						tabindex="0"
-						on:keyup={(e) => onNavigate(e, route.path)}
-						on:click={(e) => onNavigate(e, route.path)}
-					>
-						<span>
-							{route.name}
-						</span>
-					</a>
-				{/each}
-			</div>
-			<div class="header-bar__navigation__routes header-bar__navigation__routes--mobile">
-				<div
-					class="header-bar__navigation__routes__hamburger"
-					role="link"
-					tabindex="0"
-					on:keyup={toggleMenu}
-					on:click={toggleMenu}
-					class:header-bar__navigation__routes__hamburger--visible={!isMenuVisible}
-				>
-					<DynamicIcon name="icon-menu" />
-				</div>
-				<div
-					class="header-bar__navigation__routes__close"
-					role="link"
-					tabindex="0"
-					on:keyup={toggleMenu}
-					on:click={toggleMenu}
-					class:header-bar__navigation__routes__close--visible={isMenuVisible}
-				>
-					<DynamicIcon name="icon-close" type="large" />
-				</div>
-				<div
-					class="header-bar__navigation__routes__list"
-					class:header-bar__navigation__routes__list--visible={isMenuVisible}
-				>
-					<ul>
-						{#each nav as route (route.path)}
-							<li>
-								<a
-									href={`./${route.path}`}
-									tabindex="0"
-									class="header-bar__navigation__routes__route"
-									class:header-bar__navigation__routes__route--active={active == route.path}
-									on:keyup={(e) => onNavigate(e, route.path)}
-									on:click={(e) => onNavigate(e, route.path)}
-								>
-									<span>
-										{route.name}
-									</span>
-								</a>
-							</li>
-						{/each}
-					</ul>
-				</div>
-			</div>
-		</nav>
 	</div>
 </header>
 

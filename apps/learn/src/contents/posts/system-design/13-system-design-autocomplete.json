@@ -1,9 +1,7 @@
 {
 	"id": "13-system-design-autocomplete",
-	"date": "22. 11. 2023",
-	"title": "System Design 13 - Autocomplete",
+	"order": 13,
+	"title": "Autocomplete",
 	"subtitle": "How google suggests search results",
-	"tags": ["system-design", "system", "design"],
-	"description": "Thirteenth part continue on google with designing autocomplete.",
-	"breadcrumbs": "System Design"
+	"description": "Thirteenth part continue on google with designing autocomplete."
 }

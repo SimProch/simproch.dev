@@ -3,7 +3,7 @@
     export const contents = Contents
 </script>
 
-# {Contents.title}
+# {Contents.order} - {Contents.title}
 
 {contents.subtitle}
 

@@ -1,9 +1,7 @@
 {
 	"id": "8-system-design-url-shortener",
-	"date": "14. 11. 2023",
-	"title": "System Design 8 - URL shortener",
+	"order": 8,
+	"title": "URL shortener",
 	"subtitle": "Creating own tinyurl",
-	"tags": ["system-design", "system", "design"],
-	"description": "Eighth part elaborates on unique ID with creating own URL shortener.",
-	"breadcrumbs": "System Design"
+	"description": "Eighth part elaborates on unique ID with creating own URL shortener."
 }

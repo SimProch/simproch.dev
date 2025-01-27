@@ -1,9 +1,7 @@
 {
 	"id": "03-hash-maps",
-	"date": "26. 11. 2023",
+	"order": 3,
 	"title": "Hash Maps",
 	"subtitle": "Fast lookups",
-	"tags": ["data", "structures", "hash", "maps"],
-	"description": "Hash tables in JS.",
-	"breadcrumbs": "Data Structures & Algorithms"
+	"description": "Hash tables in JS."
 }

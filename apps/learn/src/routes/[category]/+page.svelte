@@ -1,28 +1,91 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { Contents, getTagsFromPosts } from 'src/contents/contents';
 	import type { Category, CategoryId } from 'src/contents/base';
-	import Body from 'src/components/core/Body.svelte';
-	import LatestPosts from 'src/components/core/LatestPosts.svelte';
-	import Meta from 'src/components/core/Meta.svelte';
+	import { Contents } from 'src/contents/contents';
 
-	let currentContent: Category;
+	let contents: Category;
 
 	$: {
-		currentContent = Contents[$page.params.category as CategoryId];
+		contents = Contents[$page.params.category as CategoryId];
 	}
 </script>
 
-<Meta
-	title={`${currentContent ? currentContent.title : ''} | Simon Prochazka | Developer`}
-	keywords={`tags, ${getTagsFromPosts(currentContent.posts ?? []).join(', ')}, blog, simon, prochzka`}
-	description={`Posts containing ${getTagsFromPosts(currentContent.posts ?? []).join(', ')}`}
-/>
+<nav class="category">
+	<ul>
+		{#each contents.posts as post}
+			<li>
+				<a href={`/${$page.params.category}/${post.id}`}>
+					<span class="order">{post.order}:</span>
+					<span class="title">
+						{post.title}
+					</span>
+				</a>
+			</li>
+		{/each}
+	</ul>
+</nav>
 
-<div>
-	
-</div>
+<style lang="scss">
+	@import '../../variables.scss';
 
-<Body>
-	<LatestPosts category={currentContent} />
-</Body>
+	.category {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding-top: 32px;
+		padding-bottom: 32px;
+		margin-left: 15vw;
+		margin-right: 15vw;
+
+		@media (max-width: 780px) {
+			margin-left:5vw;
+			margin-right:5vw;
+		}
+
+		ul {
+			list-style-type: none;
+			width: 50%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+
+			@media (max-width: 780px) {
+				width: 100%;
+			}
+
+			li {
+				width: 100%;
+				cursor: pointer;
+
+				&:hover,
+				&:focus {
+					a {
+						opacity: 0.65;
+					}
+				}
+
+				a {
+					color: #000;
+					opacity: 0.45;
+					padding: 4px 12px;
+					font-weight: $menu-font-weight;
+					line-height: 1.5;
+					font-size: 1.3rem;
+					text-decoration: none;
+					display: block;
+					width: 100%;
+					display: flex;
+					flex-direction: row;
+
+					span {
+						display: flex;
+
+						&.order {
+							width: 50px;
+						}
+					}
+				}
+			}
+		}
+	}
+</style>

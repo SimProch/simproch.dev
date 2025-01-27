@@ -1,9 +1,7 @@
 {
 	"id": "09-graphs",
-	"date": "2. 12. 2023",
+	"order": 9,
 	"title": "Graphs",
 	"subtitle": "Social networks & stuff",
-	"tags": ["data", "structures", "tree", "graph"],
-	"description": "Let's build upside down trees",
-	"breadcrumbs": "Data Structures & Algorithms"
+	"description": "Let's build upside down trees"
 }

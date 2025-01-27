@@ -245,6 +245,34 @@
 		top: -5rem;
 	}
 
+	:global(.divider) {
+		height: 8px;
+		width: 30px;
+		border-radius: 8px;
+		background-color: #888;
+		align-self: center;
+		justify-self: center;
+		margin: 4px 0;
+	}
+
+	:global(.flex-row) {
+		display: flex;
+		flex-direction: row;
+
+		@media (max-width: 1000px) {
+			flex-direction: column;
+		}
+	}
+
+	:global(.flex-col) {
+		display: flex;
+		flex-direction: column;
+	}
+
+	:global(.flex-col.flex-col--center) {
+		align-items: center;
+	}
+
 	.screen-saver {
 		position: fixed;
 		top: 0;

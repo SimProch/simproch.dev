@@ -1,11 +1,10 @@
 <script>
     import Contents from './02-array-based-data-structures.json';
-    export const contents = Contents
 </script>
 
-# {Contents.title}
+# {Contents.order} - {Contents.title}
 
-{contents.subtitle}
+{Contents.subtitle}
 
 ## [Introduction](#intro)<span id="intro" />
 

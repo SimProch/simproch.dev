@@ -10,10 +10,6 @@ export const data: Footer = {
       linkTo: 'https://www.linkedin.com/in/simon-prochazka-profile/'
     },
     {
-      name: 'twitter.ico',
-      linkTo: 'https://twitter.com/SimProch'
-    },
-    {
       name: 'stack-overflow.ico',
       linkTo: 'https://stackoverflow.com/users/11358693/simproch'
     }

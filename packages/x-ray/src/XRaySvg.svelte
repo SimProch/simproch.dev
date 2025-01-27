@@ -28,10 +28,8 @@
   });
 
   function cursorPoint(e: { clientX: number; clientY: number }, svg: SVGGraphicsElement) {
-    const boundaries = div.getBoundingClientRect();
-
-    svgPoint.x = e.clientX - boundaries.left;
-    svgPoint.y = e.clientY - boundaries.top;
+    svgPoint.x = e.clientX;
+    svgPoint.y = e.clientY;
     return svgPoint.matrixTransform(svg.getScreenCTM()?.inverse());
   }
 
@@ -50,8 +48,9 @@
     <image
       xmlns:xlink="http://www.w3.org/1999/xlink"
       xlink:href="/images/hand-flesh.jpeg"
-      width="100%"
+      preserveAspectRatio="none"
       height="100%"
+      width="100%"
     />
   </svg>
 
@@ -65,6 +64,7 @@
       <image
         xmlns:xlink="http://www.w3.org/1999/xlink"
         xlink:href="/images/hand-bone.jpeg"
+        preserveAspectRatio="none"
         width="100%"
         height="100%"
       />
@@ -84,6 +84,10 @@
     width: 100%;
     height: 400px;
     position: relative;
+
+    @media (max-width: 780px) {
+      height: 250px;
+    }
   }
 
   svg {
