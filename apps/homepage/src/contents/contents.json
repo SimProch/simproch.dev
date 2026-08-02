@@ -46,7 +46,11 @@
 							{ "name": "MS-SQL", "linkTo": "https://www.microsoft.com/en-us/sql-server" },
 							{ "name": "MySQL", "linkTo": "https://www.mysql.com/" },
 							{ "name": "Prisma", "linkTo": "https://www.prisma.io/" },
-							{ "name": "TypeORM", "linkTo": "https://typeorm.io/" }
+							{ "name": "TypeORM", "linkTo": "https://typeorm.io/" },
+							{
+								"name": "Cosmos DB",
+								"linkTo": "https://azure.microsoft.com/en-us/products/cosmos-db/"
+							}
 						]
 					},
 					{
@@ -61,7 +65,12 @@
 							{ "name": "Microsoft Azure", "linkTo": "https://azure.microsoft.com/en-us" },
 							{ "name": "Miro", "linkTo": "https://miro.com/" },
 							{ "name": "Netlify", "linkTo": "https://www.netlify.com/" },
-							{ "name": "Notion", "linkTo": "https://www.notion.so/" }
+							{ "name": "Notion", "linkTo": "https://www.notion.so/" },
+							{ "name": "Copilot", "linkTo": "https://copilot.microsoft.com/" },
+							{
+								"name": "MCP",
+								"linkTo": "https://modelcontextprotocol.io/docs/2026-07-28/getting-started/intro"
+							}
 						]
 					}
 				]
@@ -71,6 +80,11 @@
 	"experience": {
 		"title": "My experience",
 		"blocks": [
+			{
+				"identifier": "microsoft",
+				"companyName": "Microsoft",
+				"content": "Microsoft is a leading global technology company with a diverse portfolio of products and services. I contribute to Microsoft Teams by supporting audience management and streamlining release processes for feature teams."
+			},
 			{
 				"identifier": "level-works",
 				"companyName": "Level.works",
@@ -215,6 +229,55 @@
 			},
 			"actions": [
 				{ "name": "Company page", "linkTo": "https://nl.level.works/" },
+				{ "name": "Go back", "linkTo": "https://simproch.dev/" }
+			]
+		}
+	},
+	"MICROSOFT": {
+		"breadcrumbs": "Experience",
+		"title": "Microsoft",
+		"subtitle": "Shipping features for millions on Microsoft Teams.",
+		"detail": {
+			"overview": {
+				"title": "Role description",
+				"textBlocks": [
+					"Going to Microsoft had been a long-term goal of mine. I first interviewed in 2022—and failed pretty badly. After six attempts, 36 interviews, and a few 6-month breaks (plus a blog to learn DSA and system design), I finally got an offer in 2025.",
+					"I joined a newly formed team in Prague, working on audience management and the release process for client-facing features. My work focused on feature releases, feature flags, telemetry, monitoring, and improving how we ship safely.",
+					"At Microsoft’s scale, collaboration became a huge part of the job. Compared to my previous roles, where coding dominated, here even small issues can impact millions of users. Leading meetings with 50+ people was a new experience—and one I won’t forget."
+				]
+			},
+			"skills": {
+				"title": "Technologies used",
+				"skills": [
+					{ "name": "Azure", "linkTo": "https://azure.microsoft.com/en-us" },
+					{ "name": "TypeScript", "linkTo": "https://www.typescriptlang.org/" },
+					{
+						"name": ".NET Core",
+						"linkTo": "https://learn.microsoft.com/en-us/dotnet/core/introduction"
+					},
+					{ "name": "React", "linkTo": "https://react.dev/" },
+					{
+						"name": "Azure DevOps",
+						"linkTo": "https://azure.microsoft.com/en-us/services/devops/"
+					},
+					{
+						"name": "Cosmos DB",
+						"linkTo": "https://azure.microsoft.com/en-us/products/cosmos-db/"
+					},
+					{ "name": "Copilot", "linkTo": "https://copilot.microsoft.com/" },
+					{
+						"name": "MCP",
+						"linkTo": "https://modelcontextprotocol.io/docs/2026-07-28/getting-started/intro"
+					},
+					{ "name": "Git", "linkTo": "https://git-scm.com/" },
+					{ "name": "JavaScript", "linkTo": "https://www.ecma-international.org/" },
+					{ "name": "Jest", "linkTo": "https://jestjs.io/" },
+					{ "name": "MS-SQL", "linkTo": "https://www.microsoft.com/en-us/sql-server" },
+					{ "name": "Node.JS", "linkTo": "https://nodejs.org/en" }
+				]
+			},
+			"actions": [
+				{ "name": "Company page", "linkTo": "https://www.microsoft.com/" },
 				{ "name": "Go back", "linkTo": "https://simproch.dev/" }
 			]
 		}

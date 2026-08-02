@@ -67,17 +67,19 @@
 
 	const onScroll = (e: Event) => {
 		const parts = nav
-			.slice(0, -1)
+			.filter((i) => !i.isExternal)
 			.map((i) => document.querySelector(`#${i.path}`) as HTMLElement | null);
 		if (parts.includes(null)) {
 			visibleElement = nav[2].path;
 			return;
 		}
+
 		let highlightedPart = parts
 			.reverse()
 			.find((i) => i!.getBoundingClientRect().top + window.scrollY <= header.offsetTop);
 		if (highlightedPart == null) highlightedPart = parts[parts.length - 1];
 		visibleElement = highlightedPart!.id;
+
 		if (highlightedPart!.id !== lastHighlightedPart) {
 			lastHighlightedPart = highlightedPart!.id;
 			replaceState(`#${highlightedPart?.id}`, {});
