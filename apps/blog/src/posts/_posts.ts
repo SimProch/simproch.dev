@@ -6,6 +6,7 @@ import xRay from './x-ray-effect-with-html.json';
 import multipleWindowScene from './multiple-window-scene.json';
 import oneYearAtMicrosoft from './one-year-at-microsoft.json';
 import thePathTo7AV6 from './the-path-to-7a-v6.json';
+import ofFeelingsAndAcceptance from './of-feelings-and-acceptance.json';
 
 const unsortedPosts = [
 	gitCliBasicCommands,
@@ -14,7 +15,8 @@ const unsortedPosts = [
 	xRay,
 	multipleWindowScene,
 	oneYearAtMicrosoft,
-	thePathTo7AV6
+	thePathTo7AV6,
+	ofFeelingsAndAcceptance
 ];
 
 const getDateObjFromString = (date: string) => {

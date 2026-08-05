@@ -1,0 +1,27 @@
+<script>
+    import Contents from './of-feelings-and-acceptance';
+    export const contents = Contents
+</script>
+
+# {Contents.title}
+
+{Contents.subtitle}
+
+## Introduction <span id="intro" />
+
+A draft about personal feelings, boundaries, and acceptance.
+
+## Main idea <span id="main-idea" />
+
+TODO: Write about accepting that some people are no longer part of your daily life.
+TODO: Add thoughts about choosing to invest more in people who bring mutual care and growth.
+
+## Takeaways <span id="takeaways" />
+
+- Not every relationship needs to be preserved forever.
+- Distance can be healthy, not hostile.
+- Intention matters: spend more time with people you want to truly know.
+
+## References <span id="references" />
+
+- TODO
