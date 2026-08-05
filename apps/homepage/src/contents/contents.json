@@ -10,7 +10,8 @@
 				"title": "Get to know me",
 				"blocks": [
 					"I'm an enthusiastic programmer with an academic background in information management and economics. Beyond my passion for technology and data, I enjoy personal challenges like obstacle courses, marathons, and bouldering. I come from the village of Sloup in Czechia and have called Brno home since 2018.",
-					"I specialize in JavaScript for web and mobile development, focusing on various development methodologies, including behavior-driven and test-driven approaches. The Feynman technique inspired me to start blogging about my career and hobbies, sharing my experiences and knowledge."
+					"I specialize in crafting scalable and maintainable applications, focusing on Web & Mobile Development. JavaScript is my language of choice as I like to hurt myself with confusing code.",
+					"The Feynman technique inspired me to start blogging about my career and hobbies, sharing my experiences and knowledge."
 				]
 			},
 			"skills": {
@@ -242,7 +243,7 @@
 				"title": "Role description",
 				"textBlocks": [
 					"Going to Microsoft had been a long-term goal of mine. I first interviewed in 2022—and failed pretty badly. After six attempts, 36 interviews, and a few 6-month breaks (plus a blog to learn DSA and system design), I finally got an offer in 2025.",
-					"I joined a newly formed team in Prague, working on audience management and the release process for client-facing features. My work focused on feature releases, feature flags, telemetry, monitoring, and improving how we ship safely.",
+					"I joined a newly formed team in Prague, working on audience management and the release process for client-facing features. My work focused on feature releases, feature flags, telemetry, monitoring, and improving how we ship safely. Put simply, I was the person shipping Microsoft Teams to your device and allowing dogfooding to limited audiences.",
 					"At Microsoft’s scale, collaboration became a huge part of the job. Compared to my previous roles, where coding dominated, here even small issues can impact millions of users. Leading meetings with 50+ people was a new experience—and one I won’t forget."
 				]
 			},
