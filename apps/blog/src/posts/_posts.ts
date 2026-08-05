@@ -4,13 +4,17 @@ import letsTalkPromisesp1 from './lets-talk-promises-part-1.json';
 import letsTalkPromisesp2 from './lets-talk-promises-part-2.json';
 import xRay from './x-ray-effect-with-html.json';
 import multipleWindowScene from './multiple-window-scene.json';
+import oneYearAtMicrosoft from './one-year-at-microsoft.json';
+import thePathTo7AV6 from './the-path-to-7a-v6.json';
 
 const unsortedPosts = [
 	gitCliBasicCommands,
 	letsTalkPromisesp1,
 	letsTalkPromisesp2,
 	xRay,
-	multipleWindowScene
+	multipleWindowScene,
+	oneYearAtMicrosoft,
+	thePathTo7AV6
 ];
 
 const getDateObjFromString = (date: string) => {

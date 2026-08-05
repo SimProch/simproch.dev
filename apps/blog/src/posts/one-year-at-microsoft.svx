@@ -1,0 +1,26 @@
+<script>
+    import Contents from './one-year-at-microsoft';
+    export const contents = Contents
+</script>
+
+# {Contents.title}
+
+{Contents.subtitle}
+
+## [Introduction](#intro)<span id="intro" />
+
+TODO: Write a short intro.
+
+## [Main idea](#main-idea)<span id="main-idea" />
+
+TODO: Add your main content.
+
+## [Takeaways](#takeaways)<span id="takeaways" />
+
+- TODO: Key point 1
+- TODO: Key point 2
+- TODO: Key point 3
+
+## [References](#references)<span id="references" />
+
+- TODO: Add references and links.

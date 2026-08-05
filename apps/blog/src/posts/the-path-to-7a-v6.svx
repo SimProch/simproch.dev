@@ -1,0 +1,26 @@
+<script>
+    import Contents from './the-path-to-7a-v6';
+    export const contents = Contents
+</script>
+
+# {Contents.title}
+
+{Contents.subtitle}
+
+## Introduction <span id="intro" />
+
+TODO: Intro.
+
+## Main idea <span id="main-idea" />
+
+TODO: Main content.
+
+## Takeaways <span id="takeaways" />
+
+- TODO
+- TODO
+- TODO
+
+## References <span id="references" />
+
+- TODO
