@@ -14,9 +14,9 @@ const unsortedPosts = [
 	letsTalkPromisesp2,
 	xRay,
 	multipleWindowScene,
-	oneYearAtMicrosoft,
-	thePathTo7AV6,
-	ofFeelingsAndAcceptance
+	// oneYearAtMicrosoft,
+	// thePathTo7AV6,
+	// ofFeelingsAndAcceptance
 ];
 
 const getDateObjFromString = (date: string) => {
