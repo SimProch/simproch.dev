@@ -7,20 +7,149 @@
 
 {Contents.subtitle}
 
-## Introduction <span id="intro" />
+## [Introduction](#intro)<span id="intro" />
 
-TODO: Intro.
+It's been a while since I wrote my last blog post. Previously, it's all been about work. I've always been chasing after something, not quite finding knowing what.
 
-## Main idea <span id="main-idea" />
+This blog has always been about learning. I've created a system design tutorial written in my own words to better understand it. A [Feynman Technique](https://en.wikipedia.org/wiki/Learning_by_teaching) if you will.
 
-TODO: Main content.
+But I've reached my goal. Ever since I started coding, I was seeing interview videos and people talking about [FAANGMULA](https://en.wikipedia.org/wiki/Big_Tech) and I knew I wanted to be part of it.
 
-## Takeaways <span id="takeaways" />
+Well, I've reached that goal. But now what?
 
-- TODO
-- TODO
-- TODO
+This is a pretty common theme in my life. I set a goal, I reach it, and yet I don't feel fulfilled. It's happened in the past.
 
-## References <span id="references" />
+## [Prior to climbing](#prior-to-climbing)<span id="prior-to-climbing" />
 
-- TODO
+Some time back in 2018, I've started being a Software Engineer. I was working for a small company part time while still in University. My contract said 24 hours. I've worked 40.
+
+When COVID started, I've still worked for the same company, and still getting my degree. But everything was closed, and I figured I'd start something new. So I started mentoring for a bootcamp, having taught 8 students who got their first IT job.
+
+I was putting my mind on the line. Working 40 hours a week, mentoring 20 hours a week, and studying for my degree.
+
+So, I figured I might do something different. It was December 2021, we were having a family reunion. My sister started talking about half marathon. Being the overachiever that I am, I started hyping her up, and got hyped up. That day, I signed up for a Marathon.
+
+I've rarely ran more than 5k before then, and now I was supposed to run 42? Unfortunately, I'm not one who gives up easily, and I trained. Within 6 months, I've finished [Sunrise Marathon in 5 hours and 21 minutes](https://www.bezvabeh.cz/media/files/vysledky/Vys42Abs%20SUN%20rise-%20Brno-%20v%C3%BDsledky.pdf).
+
+After that happened, I felt empty. I reached my goal. I was asking - "What's next?".
+
+So, I started doing this blog. I decided it's time to join Microsoft, and I did. It took me 3 years, 6 attempts, 36 interviews, but eventually, I did.
+
+The timelines don't lie. I've finished Marathon in June 2022. I've joined Microsoft in May 2025.
+
+But this is not a happy story. What I did wasn't healthy.
+
+- In my first company, I effectivelly worked 16 hours a day for free
+- During COVID, I was draining myself mentally, working for a company, finishing a degree, and mentoring other people
+- Once I was satiated with my career, I started pursuing another goal - running. Which I did not enjoy, and my back hurts ever since
+- Then I went back to career goals, going towards Microsoft
+
+That's NOT healthy. And I wasn't. I ended up on meds for a brief time.
+
+But here we are...
+
+## [Starting to climb](#starting-to-climb)<span id="starting-to-climb" />
+
+You may be asking - "How is that relevant to climbing?"
+
+In 2023, a then colleague of mine pushed me to go climbing. I think it's worth saying some facts about me.
+
+- I'm 175 cm tall.
+- I was not a physical person before Marathon. I despise my PE teacher to this day for making fun of me in front of the class.
+- When I was 15, I weighed 114 kg.
+- When I ran a Marathon, I weighed 98 kg.
+
+And then I was pushed to go climbing. I didn't want to go; I was making excuses for 3 months. Eventually, Noe pushed me to go to a local bouldering gym.
+
+I was thrilled. It was amazing! I felt pain. Good pain. Muscles being sore in places I didn't know existed.
+
+And I was hooked ever since. I've started going 3 times a week, and I was enjoying it. I haven't felt "being in the zone" since the start of my career.
+
+## [Improving my life](#improving-my-life)<span id="improving-my-life" />
+
+I'm a Software Engineer. Software Engineers are dicks. Financially, our life is great. We make more than most of the population. And we stil love free things and we're angry if we don't have free snacks in office.
+
+Financially, my life is not bad. The career progression is fantastic. I'm able to save loads of money, go on vacations, and still go out for a coffee every day.
+
+It's a sad thing really. There are single mothers who work 2 jobs and barely get by. And I'm here, complaining about financially stable life. But I'll be talking about finances in another post.
+
+So, what's there to improve? Well, my mental health.
+
+As you may have guessed on the description above, I did not feel satiated with my life. Remember when I was talking about Marathon and I felt empty? Within 
+a month, we broke up with my then girlfriend (bless her heart, she is a wonderful person, even though we don't have a word to say to each other). And I ended up on meds.
+
+I will never regret going to see a psychiatrist and therapy. I've learned so much about myself. I've found about issues I've had and that it's a pretty normal thing. I found people to talk to, and I started being more open about my life and emotions ever since. 
+I've experienced things within 6 months of that break up that I had never imagined I'll experience, and I don't want to experience again. But I did, and thanks to that, I know what I like, and what I don't.
+
+You need to experience things to know if you like them or not. I've experienced loads of things since then. Just to name a few:
+
+- I've jumped out of a plane with a parachute (would, fantastic)
+- I've done a bungee jumping (wouldn't, overrated)
+- I've been to a shooting range (wouldn't, overrated)
+- I've started climbing (would, would, would)
+
+And this is where the climbing starts. There were many things that I've experienced. And there are 2 things that I love.
+- Software Development, especially its problem solving aspect
+- Climbing
+
+## [Intermezzo - Mental Health](#intermezzo-mental-health)<span id="intermezzo-mental-health" />
+
+Just to be clear, this blog has thus far been about my career. My primary goal until 2025. This is changing. I've always written the blog for myself, to learn things.
+
+And this is still the case. I'm writing this as a diary. That I'm sharing with the world, because I just don't care if my life's an open book.
+
+I've been ignoring my mental health. I've pushed it aside because I was chasing things, and I still am to a degree. Therapy and climbing made my life better.
+
+If you're having similar issues, I'm not saying climbing and therapy will work for you. But climbing is just a sport, and therapy is just talking to people.
+
+In my humble opinion, those are the 2 main ways to get out of mental health issues. Talking to people, and sport. Climbing just happens to combine the 2.
+
+Gym never worked for me. It's all alone. Running never worked for me. It's all alone. In climbing, you're always surrounded by people (if you want to live a long life).
+
+So, all that being said, this blog is for me, but if there's one message that I'd like to share with the rest of the world, it's this.
+
+Go out there, do some exercise, and talk to people. You will feel better.
+
+## [What is climbing](#what-is-rock-climbing)<span id="what-is-rock-climbing" />
+
+So, what is rock climbing? [Casually Explained would like to have a word with you](https://www.youtube.com/watch?v=VtIyrJCfhk4).
+
+In short:
+- You go into a gym or out
+- You use your hands and feet to climb 3 to 20 meters
+- If you go high, you are using safety features
+- If you go low, you're not
+
+In very short, that's it. But how did it help me?
+
+Well, I'm probably going to infuriate a lot of people for saying this, but every time I enter any climbing place, it's different.
+
+I've ran a Marathon, and I trained a lot for it. But it's repetitive. For a duration of 6 months, I ran out from my house and did a maximum of 50 different routes. I always start and end at the same place.
+
+I've been going to the gym. And I've been just lifting things. The same things. With different weight. Always on the same spot.
+
+In the three years I've been climbing, this hasn't happened to me. Consider the image below - a so-called Spray Wall.
+
+<div style="display: flex; justify-content: center">
+    <img src="/images/spray-wall.jpg" width="50%" alt="spray wall"/>
+</div>
+
+The spray wall has virtually infinite number of problems. You could spend there a year, and you'd still climb only a fraction of possible boulders, because with any 5 random holds, you could make a tens of boulders.
+
+And that is what makes it so interesting for me, and what works for me. I go to the gym. I go there 3 times a week. And I just have fun, and climb, and talk to people.
+
+There's way more to explore with climbing, and I have barely touched the surface myself. But I'm happy I started.
+
+It's dangerous. I hurt myself quite a few times. But it made my life better.
+
+## [To End With Some Numbers](#to-end-with-some-numbrers)<span id="to-end-with-some-numbrers" />
+
+There are some things I'm particularly proud of. When I started climbing, I had 98kg. I was overweight. I was unable to do a single pull up.
+
+Well, three years I've been climbing. And vast majority of my strength comes from being in the gym and having fun.
+
+In 2023, I was 98kg, overweight, and couldn't do a pull up. If I fell around a raiing, I probably wouldn't pull myself back.
+
+In 2026, I'm 80 kg, in shape, I can do 12 pull ups in a row, a muscle up, I'm in my best shape so far. And it's still improving, without specialised training.
+
+I'm proud of myself, and I'm happy.

@@ -40,24 +40,28 @@ Always start with this template:
 
 {Contents.subtitle}
 
-## Introduction <span id="intro" />
+## [Introduction](#intro)<span id="intro" />
 
 TODO: Intro.
 
-## Main idea <span id="main-idea" />
+## [Main idea](#main-idea)<span id="main-idea" />
 
 TODO: Main content.
 
-## Takeaways <span id="takeaways" />
+## [Takeaways](#takeaways)<span id="takeaways" />
 
 - TODO
 - TODO
 - TODO
 
-## References <span id="references" />
+## [References](#references)<span id="references" />
 
 - TODO
 ```
+
+Heading rule:
+- Use linked H2 headings in this exact format: `## [Section title](#section-id)<span id="section-id" />`.
+- Keep anchor link and `id` identical.
 
 ## 4) Register metadata in `_posts.ts`
 Update `apps/blog/src/posts/_posts.ts`:

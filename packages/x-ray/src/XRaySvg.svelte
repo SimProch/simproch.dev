@@ -8,7 +8,7 @@
   let div: HTMLDivElement;
 
   onMount(() => {
-    div = document.querySelector('#hand-flesh-wrapper');
+    div = document.querySelector('#hand-flesh-wrapper')!;
     svgElement = document.querySelector('svg')!;
     maskedElement = document.querySelector('#mask-circle')!;
     circleFeedback = document.querySelector('#circle-shadow')!;

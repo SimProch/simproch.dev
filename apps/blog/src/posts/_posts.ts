@@ -15,7 +15,7 @@ const unsortedPosts = [
 	xRay,
 	multipleWindowScene,
 	// oneYearAtMicrosoft,
-	// thePathTo7AV6,
+	thePathTo7AV6,
 	// ofFeelingsAndAcceptance
 ];
 
