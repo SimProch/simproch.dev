@@ -12,10 +12,10 @@
     "eslint": "^8.57.0",
     "prettier": "^3.2.5",
     "prettier-plugin-svelte": "^3.2.2",
-    "turbo": "latest"
+    "turbo": "^2.11.11"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=24"
   },
   "packageManager": "npm@8.15.0",
   "workspaces": [
@@ -24,5 +24,12 @@
   ],
   "dependencies": {
     "playwright-qase-reporter": "^2.0.15"
+  },
+  "name": "simproch-dev",
+  "devEngines": {
+    "packageManager": {
+      "name": "npm",
+      "version": "11.17.0"
+    }
   }
 }
