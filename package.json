@@ -7,11 +7,11 @@
     "format": "prettier --write ."
   },
   "devDependencies": {
-    "@simproch-dev/config-eslint": "*",
-    "@types/node": "^22.7.4",
-    "eslint": "^8.57.0",
-    "prettier": "^3.2.5",
-    "prettier-plugin-svelte": "^3.2.2",
+    "@simproch-dev/config-eslint": "^0.0.0",
+    "@types/node": "^22.20.5",
+    "eslint": "^8.57.1",
+    "prettier": "^3.10.1",
+    "prettier-plugin-svelte": "^3.5.2",
     "turbo": "^2.11.11"
   },
   "engines": {
@@ -23,7 +23,7 @@
     "packages/*"
   ],
   "dependencies": {
-    "playwright-qase-reporter": "^2.0.15"
+    "playwright-qase-reporter": "^2.8.1"
   },
   "name": "simproch-dev",
   "devEngines": {

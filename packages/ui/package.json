@@ -14,7 +14,7 @@
     "lint": "eslint ."
   },
   "devDependencies": {
-    "@simproch-dev/config-eslint": "*",
-    "svelte": "^4.2.12"
+    "@simproch-dev/config-eslint": "^0.0.0",
+    "svelte": "^4.2.20"
   }
 }
