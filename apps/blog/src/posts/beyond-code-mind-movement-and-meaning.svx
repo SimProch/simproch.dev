@@ -1,5 +1,6 @@
 <script>
     import Contents from './beyond-code-mind-movement-and-meaning';
+    import { Image } from '@simproch-dev/ui';
     export const contents = Contents
 </script>
 
@@ -130,9 +131,7 @@ I've been going to the gym. And I've been just lifting things. The same things. 
 
 In the three years I've been climbing, this hasn't happened to me. Consider the image below - a so-called Spray Wall.
 
-<div style="display: flex; justify-content: center">
-    <img src="/images/spray-wall.jpg" width="50%" alt="spray wall"/>
-</div>
+<Image path="/images/spray-wall.jpg" />
 
 The spray wall has virtually infinite number of problems. You could spend there a year, and you'd still climb only a fraction of possible boulders, because with any 5 random holds, you could make a tens of boulders.
 

@@ -5,6 +5,7 @@ import letsTalkPromisesp2 from './lets-talk-promises-part-2.json';
 import xRay from './x-ray-effect-with-html.json';
 import multipleWindowScene from './multiple-window-scene.json';
 import beyondCodeMindMovementAndMeaning from './beyond-code-mind-movement-and-meaning.json';
+import overcoming7APlateau from './overcoming-7a-plateau.json';
 
 const unsortedPosts = [
 	gitCliBasicCommands,
@@ -12,7 +13,8 @@ const unsortedPosts = [
 	letsTalkPromisesp2,
 	xRay,
 	multipleWindowScene,
-	beyondCodeMindMovementAndMeaning
+	beyondCodeMindMovementAndMeaning,
+	overcoming7APlateau
 ];
 
 const getDateObjFromString = (date: string) => {

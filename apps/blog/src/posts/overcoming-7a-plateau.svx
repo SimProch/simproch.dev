@@ -1,0 +1,118 @@
+<script>
+    import Contents from './overcoming-7a-plateau';
+    import { Image } from '@simproch-dev/ui';
+    export const contents = Contents
+</script>
+
+# {Contents.title}
+
+{Contents.subtitle}
+
+## [Introduction](#intro)<span id="intro" />
+
+I've been climbing for almost 4 years now. I've started in March 2023 and I've climbed my first 6C some time in 2024. My first 7A came in 2025 and since I've been stuck.
+
+Climbing plateau is a pretty standard thing. Some people never clear the 7A mark. Roughly 10 % of climbers ever get to 7A, and it just gets smaller and smaller. The bouldering grades can be found below.
+
+<Image path="/images/boulder-grading.jpg" />
+
+Being the stubborn guy that I am, this blog post is about techniques and overcoming plateaus.
+
+## [What is a Climbing Plateau](#what-is-a-plateau)<span id="main-idea" />
+
+A Climbing Plateau is a point when you get to a point and feel like you're not getting better. It's also very unfair.
+
+Let me put a perspective on this:
+
+- When you first enter a climbing gym, chances are you can climb 5A, 5B, 5C. Some even get to 6A/6A+
+- After a couple months, you get your first 6B
+- After another couple months, you get to your 6C
+- You're unlikely to climb 7A within the next year
+- If you're not serious about training, you'll never get over 7B
+
+And that's the [unfairity](https://www.youtube.com/watch?v=gwYwng2pXXM) of it. In your first day, you are likely to climb the first 5 grades. The next 5 grades can take you multiple years. And what's behind is potentially unreachable.
+
+I blame the system. Asian climbers have it better. Their 5s are extremely hard. You don't ever get your hopes up.
+
+## [The Mental Toll](#mental-toll)<span id="main-idea" />
+
+It's one thing that the grading is so tough. The other thing is - your genetics matter.
+
+There are multiple styles. Depending on wall angle, you can find slabs, verticals, overhangs and roofs. Depending on types of movements, you can have dynamic climbs (or dynos), arêtes, or traverses.
+
+Now, there are different holds. Slopers, crimps, jugs and more.
+
+Now, let's consider a dynamic movement where you have 2 holds 3 meters from each other.
+- If you're a 2 meters tall person, you'll likely just have to jump just one meter - or half your size
+- If you're a 150cm short person, you'll have to jump 100 % of your size
+
+The genetics of a short person are significantly at a disadvantage in a dynamic movement.
+
+But does it mean a tall climber is always better?
+
+Well, no. Consider crimps - a small edge where you have only 2cm of area to hold onto. It's a massive force you need to have just in your fingers to move through these. Using the same example as above:
+- If you're a 2 meters tall person, chances are you're also 100kg heavy. Your fingers are unlikely to withstand the weight
+- If you're a 150cm short person, you're also likely half as heavy as the tall person. Your fingers are fine and it'll be way easier for you
+
+So no, tall climber is not always better. And this is just one example. On sit starts, tall people will hardly fit. Smaller folk will likely have no issues with these.
+
+The list is not finite. And both can eventually climb the same problem, but need to focus on other areas to improve themselves in. Some people need to focus on different trainings and techniques due to their genetic advantages and disadvantages.
+
+But one's perception can be an issue
+- I see a boulder that my 30cm taller friend did. I can't do it. I know I can climb other boulders that he can, but I can't do this one! He must be better climber
+- At the same time, my friend probably thinks the same about me.
+
+I have friends who are tall and consistently climb 7As, but struggle with 6Bs. Similarly, I have friends who climb all the 6Cs in the gym, but don't do 7A because they feel inferior.
+
+And that's the mental toll. Plateau is different for everyone. Everyone has different strengths and weaknesses, and needs to focus on them.
+
+## [My Strengths and Weaknesses](#my-strengths-and-weaknesses)<span id="my-strengths-and-weaknesses" />
+
+So, to focus on overcoming plateau, everyone needs to find their own flaws and address them. Very rarely strength is the problem.
+
+Don't get me wrong, strength helps tremendously. I'm the weakest in my group, and we all climb 7As. The only difference is - I have more 7As on record, because I'm a more rounded climber.
+
+### [Strengths](#strengths)<span id="strengths" />
+
+- Heel hooks and external hip rotation
+- Finger Strength
+- Upper Body Strength
+- Stubborness & Technique
+- Dynamic Movements
+- Projecting
+
+Anectodally, due to bad lifestyle and wrong walking technique, I've developed fairly weak right hip and have knee issues. But this is also one of my strongest 
+areas. I can do heel hooks pretty easily.
+
+I've also trained fingers since I started climbing and done loads pull ups, making powerful boulders, especially crimpy, a strong area of mine.
+
+I'm very stubborn. On one boulders this year, I've spent a total of 314 attempts before I climbed it. As such, my technique is pretty solid.
+There is loads to improve, but it's pretty strong. I'm able to spend 4 hours in the gym focusing on a single boulder, analysing every small detail of my climb.
+
+With such stubborness, dynamic movements are my strong area as well. With dynamic movements, you just need to do them many times until you're not scared anymore.
+I've done loads of dynos and I'm pretty good at it.
+
+Finally, projecting is my very strong area. I've been using spray wall for a long time to create my own boulders, thinking like a route setter. As such, I've developed
+a pretty good mind for projecting.
+
+### [Weaknesses](#weaknesses)<span id="weaknesses" />
+
+- Injuries
+- Toe hooks
+- Mantles
+- Slopers
+
+As I mentioned above, I had a pretty bad lifestyle. In the past 3 years, I've dislocated my elbow, sprained my ankle, had a pulley injury twice. I think that out of the last 3 years, I've been out for a year.
+Similarly, while my external hip rotation is very good, my right hip is very weak, and internal hip rotation is quite inadequate. Which means my knee is taking the load and is injurious.
+
+Toe hooks are something I've been significantly trying to improve lately. I've also found that it's related to the weak hips quite a bit.
+
+Mantles is one thing that I'm not necessarily bad at, but I'm not very good at it. I very much enjoy pulling exercises and pushing is something that I don't fancy. Mantles are a lot about pushing strength, which I do not train.
+
+Similarly, slopers are pretty bad for me. While I understand the technique, my wrist is pretty weak. Due to that, slopers are one thing that I struggle with.
+
+## [Takeaways](#takeaways)<span id="takeaways" />
+
+This write down is primarily for myself to see what I should focus on. Especially the injury part is eye opening. I hadn't known that I've been a year out effectivelly.
+
+I'm spending quite some time doing flexibility and strength trainings, but maybe it's time to do a step back and focus on day to day life. Making sure I warm up more, and I take better care of my tendons. Otherwise, my fingers will be the next to go.
