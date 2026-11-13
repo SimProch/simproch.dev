@@ -26,7 +26,7 @@
 </div>
 
 <style lang="scss">
-	@import '../../variables.scss';
+	@import  '../../variables.scss';
 	.wrapper {
 		margin-top: 48px;
 		margin-bottom: 48px;
