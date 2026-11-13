@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import type { Post } from 'src/contents/posts/types';
 	import Meta from '../../../components/core/Meta.svelte';
 	import { Contents } from 'src/contents/contents';
@@ -16,8 +16,8 @@
 
 	$: {
 		component = data.component;
-		categoryId = $page.params.category as CategoryId;
-		const postName = $page.params.postName;
+		categoryId = page.params.category as CategoryId;
+		const postName = page.params.postName;
 		category = Contents[categoryId];
 		const postIndex = category.posts.findIndex((post) => post.id === postName);
 		contents = category.posts[postIndex];

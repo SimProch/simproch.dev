@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import type { Category, CategoryId } from 'src/contents/base';
 	import { Contents } from 'src/contents/contents';
 
 	let contents: Category;
 
 	$: {
-		contents = Contents[$page.params.category as CategoryId];
+		contents = Contents[page.params.category as CategoryId];
 	}
 </script>
 
@@ -14,7 +14,7 @@
 	<ul>
 		{#each contents.posts as post}
 			<li>
-				<a href={`/${$page.params.category}/${post.id}`}>
+				<a href={`/${page.params.category}/${post.id}`}>
 					<span class="order">{post.order}:</span>
 					<span class="title">
 						{post.title}

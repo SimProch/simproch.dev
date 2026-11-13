@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	let logo = '/images/logo.png';
 
 	const onLogoClick = (event: PointerEvent | KeyboardEvent | any) => {
@@ -9,7 +9,7 @@
 			return;
 		}
 
-		if ($page.route.id !== '/') {
+		if (page.route.id !== '/') {
 			goto('/');
 			return;
 		}

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto, replaceState } from '$app/navigation';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { DynamicIcon } from '@simproch-dev/ui';
 	const nav: Array<{ path: string; name: string; isExternal?: true }> = [
 		{ path: 'home', name: 'Home' },
@@ -48,7 +48,7 @@
 
 		isMenuVisible = !isMenuVisible;
 		if (!item) {
-			goto(`${$page.url.origin}/${selector}`);
+			goto(`${page.url.origin}/${selector}`);
 			return false;
 		}
 
